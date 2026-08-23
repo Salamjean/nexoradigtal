@@ -19,18 +19,13 @@
             </div>
         </div>
 
-        <!-- Center Logo: NEXORA ('n' with glowing blue dot accent) -->
-        <a href="{{ route('home') }}" class="group flex items-center gap-2 text-white font-heading font-extrabold text-2xl tracking-wider my-2 lg:my-0">
-            <div class="relative flex items-center justify-center">
-                <!-- Cyan blue accent square dot -->
-                <span class="absolute -top-1 -left-1 w-2.5 h-2.5 bg-blue-500 rounded-xs shadow-sm shadow-blue-400 group-hover:scale-125 transition-transform duration-300"></span>
-                <!-- Lowercase geometric 'n' icon -->
-                <span class="text-4xl leading-none text-white font-heading font-black tracking-tighter">n</span>
-            </div>
+        <!-- Center Logo -->
+        <a href="{{ route('home') }}" class="group flex items-center my-2 lg:my-0">
+            <img src="{{ asset('assets/img/LOGONEXORA.png') }}" alt="NEXORA DIGITAL SARL" class="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300">
         </a>
 
         <!-- Right Navigation Bar: Floating White Capsule Menu -->
-        <nav class="bg-white/95 backdrop-blur-md rounded-full px-3 py-1.5 shadow-2xl flex items-center gap-1 sm:gap-2 text-slate-800 text-xs sm:text-sm font-semibold border border-white/50">
+        <nav class="max-w-full overflow-x-auto nx-scroll-hide bg-white/95 backdrop-blur-md rounded-full px-3 py-1.5 shadow-2xl flex items-center gap-1 sm:gap-2 text-slate-800 text-xs sm:text-sm font-semibold border border-white/50">
             
             <a href="{{ route('home') }}" class="px-3 sm:px-4 py-2 text-slate-900 hover:text-blue-600 transition relative group">
                 Maison
@@ -45,7 +40,7 @@
                 Services
             </a>
 
-            <a href="#projets" class="px-3 sm:px-4 py-2 text-slate-600 hover:text-blue-600 transition rounded-full hover:bg-slate-100/70">
+            <a href="{{ route('project') }}" class="px-3 sm:px-4 py-2 text-slate-600 hover:text-blue-600 transition rounded-full hover:bg-slate-100/70">
                 Projet
             </a>
 

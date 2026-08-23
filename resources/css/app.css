@@ -1,13 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@700;900&display=swap');
 @import 'tailwindcss';
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/*
+ * "Eurostile Extended" is a commercial typeface (not distributable via this project).
+ * This @font-face only uses local() sources, so it activates automatically for any
+ * visitor who already has the font legitimately installed/licensed on their machine,
+ * and silently falls through to Poppins for everyone else.
+ */
+@font-face {
+    font-family: 'Eurostile Extended Local';
+    src: local('Eurostile Extended Bold'), local('Eurostile-ExtendedBold'), local('EurostileExtended-Bold'), local('Eurostile Extended');
+    font-weight: 700 900;
+    font-display: swap;
+}
 
 @theme {
     --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-    --font-heading: 'Syne', sans-serif;
+    --font-heading: 'Eurostile Extended Local', 'Poppins', sans-serif;
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-stat: 'Big Shoulders Display', sans-serif;
 }
 
 .font-heading {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Eurostile Extended Local', 'Poppins', sans-serif;
+}
+
+/* Hero title: letter-by-letter reveal on load (shared across pages) */
+@keyframes nx-letter-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.nx-letter {
+    display: inline-block;
+    opacity: 0;
+    animation: nx-letter-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+    .nx-letter {
+        animation: none;
+        opacity: 1;
+    }
+}
+
+/* Infinite horizontal marquees (tech pills, partner logos, gallery) */
+@keyframes nx-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+.nx-marquee-track {
+    width: max-content;
+    animation-name: nx-marquee;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.nx-marquee-track:hover {
+    animation-play-state: paused;
+}
+
+/* Horizontal chip scroller: functional but visually clean */
+.nx-scroll-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.nx-scroll-hide::-webkit-scrollbar {
+    display: none;
 }
 
 /* Custom animations & effects */
