@@ -28,7 +28,7 @@
         <nav class="max-w-full overflow-x-auto nx-scroll-hide bg-white/95 backdrop-blur-md rounded-full px-3 py-1.5 shadow-2xl flex items-center gap-1 sm:gap-2 text-slate-800 text-xs sm:text-sm font-semibold border border-white/50">
             
             <a href="{{ route('home') }}" class="px-3 sm:px-4 py-2 text-slate-900 hover:text-blue-600 transition relative group">
-                Maison
+                Accueil
                 <span class="absolute bottom-1 left-3 right-3 h-0.5 bg-slate-900 group-hover:bg-blue-600 transition-all rounded-full"></span>
             </a>
 
