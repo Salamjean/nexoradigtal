@@ -26,4 +26,9 @@ class HomeController extends Controller
     {
         return view('pages.service');
     }
+
+    public function project()
+    {
+        return view('pages.project');
+    }
 }
