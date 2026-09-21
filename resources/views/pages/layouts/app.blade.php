@@ -43,39 +43,129 @@
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white min-h-screen flex flex-col overflow-x-hidden">
 
-    <!-- Intro loading screen (plays once per browser session) -->
-    <div id="nx-intro" class="fixed inset-0 z-[9999] bg-[#0d0d0d] flex items-center justify-center">
-        <video id="nx-intro-video" src="{{ asset('assets/video/nexora-logo-reveal.mp4') }}" autoplay muted playsinline class="absolute inset-0 w-full h-full object-cover"></video>
-        <button id="nx-intro-skip" type="button" class="absolute bottom-8 right-8 text-white/50 hover:text-white text-sm font-medium transition">
-            Passer &rarr;
-        </button>
+    <!-- Écran de chargement avec vidéo d'intro (Nexora Logo Reveal - 1 seule fois par session) -->
+    <script>
+        if (sessionStorage.getItem('nx_intro_seen')) {
+            document.write('<style>#nx-preloader{display:none !important;}</style>');
+        }
+    </script>
+    <div id="nx-preloader" class="fixed inset-0 z-[99999] bg-white flex items-center justify-center transition-opacity duration-700 ease-out">
+        <div class="relative w-full h-full flex items-center justify-center overflow-hidden bg-white">
+            <video id="nx-preloader-video" 
+                   src="{{ asset('assets/video/nexora-logo-reveal.mp4') }}" 
+                   autoplay 
+                   muted 
+                   playsinline 
+                   preload="auto"
+                   class="w-full h-full object-contain md:object-cover bg-white">
+            </video>
+            <!-- Bouton passer -->
+            <button id="nx-preloader-skip" 
+                    type="button" 
+                    class="absolute bottom-6 right-6 z-10 px-4 py-2 bg-slate-900/80 hover:bg-slate-900 text-white backdrop-blur-md rounded-full text-xs font-semibold shadow-lg transition-all duration-300">
+                Passer &rarr;
+            </button>
+        </div>
     </div>
     <script>
         (function () {
-            var overlay = document.getElementById('nx-intro');
+            var overlay = document.getElementById('nx-preloader');
             if (sessionStorage.getItem('nx_intro_seen')) {
-                overlay.remove();
+                if (overlay && overlay.parentNode) {
+                    overlay.parentNode.removeChild(overlay);
+                }
                 return;
             }
-            document.documentElement.style.overflow = 'hidden';
-            var video = document.getElementById('nx-intro-video');
-            var skip = document.getElementById('nx-intro-skip');
+
+            // Marquer l'intro comme vue pour cette session
+            sessionStorage.setItem('nx_intro_seen', '1');
+
+            var video = document.getElementById('nx-preloader-video');
+            var skip = document.getElementById('nx-preloader-skip');
+            if (!overlay || !video) return;
+
+            // Masquer le défilement pendant l'animation
+            document.documentElement.classList.add('overflow-hidden');
+            document.body.classList.add('overflow-hidden');
+
+            // Configuration impérative du mode muet pour contourner les restrictions d'autoplay des navigateurs
+            video.muted = true;
+            video.defaultMuted = true;
+            video.playsInline = true;
+            video.setAttribute('muted', '');
+            video.setAttribute('playsinline', '');
+
             var closed = false;
-            function closeIntro() {
+            function closePreloader() {
                 if (closed) return;
                 closed = true;
-                sessionStorage.setItem('nx_intro_seen', '1');
-                document.documentElement.style.overflow = '';
-                overlay.style.transition = 'opacity 0.5s ease';
+
+                // Réactiver le défilement
+                document.documentElement.classList.remove('overflow-hidden');
+                document.body.classList.remove('overflow-hidden');
+
+                // Effet de fondu de sortie
                 overlay.style.opacity = '0';
-                setTimeout(function () { overlay.remove(); }, 500);
+                overlay.style.pointerEvents = 'none';
+
+                setTimeout(function () {
+                    if (overlay && overlay.parentNode) {
+                        overlay.parentNode.removeChild(overlay);
+                    }
+                }, 700);
             }
-            video.addEventListener('ended', closeIntro);
-            video.addEventListener('error', closeIntro);
-            skip.addEventListener('click', closeIntro);
-            setTimeout(closeIntro, 6000);
+
+            function startPlayback() {
+                try {
+                    video.currentTime = 0;
+                } catch (e) {}
+                
+                var playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function (error) {
+                        console.warn("Autoplay restreint par le navigateur. Attente d'une interaction utilisateur :", error);
+                        // Si le navigateur exige une interaction utilisateur
+                        var handleInteraction = function () {
+                            video.play().catch(function(){});
+                            document.removeEventListener('click', handleInteraction);
+                            document.removeEventListener('touchstart', handleInteraction);
+                        };
+                        document.addEventListener('click', handleInteraction, { once: true });
+                        document.addEventListener('touchstart', handleInteraction, { once: true });
+                    });
+                }
+            }
+
+            // Démarrer la lecture dès que le script s'exécute
+            startPlayback();
+
+            // Si le flux n'était pas encore prêt, relancer à la première opportunité
+            video.addEventListener('canplay', function () {
+                if (video.paused) {
+                    startPlayback();
+                }
+            });
+
+            // À la fin de la vidéo, maintenir l'image du logo révélé pendant 800ms avant le fondu de sortie
+            video.addEventListener('ended', function () {
+                setTimeout(closePreloader, 800);
+            });
+
+            // En cas d'erreur de la vidéo, débloquer la page
+            video.addEventListener('error', function () {
+                closePreloader();
+            });
+
+            // Bouton Passer
+            if (skip) {
+                skip.addEventListener('click', closePreloader);
+            }
+
+            // Sécurité : fermeture automatique au bout de 6 secondes max
+            setTimeout(closePreloader, 6000);
         })();
     </script>
+
 
     <!-- Navigation Header -->
     @include('pages.layouts.navbar')
