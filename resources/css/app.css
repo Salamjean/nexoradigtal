@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@700;900&family=Michroma&display=swap');
+@import url('https://fonts.cdnfonts.com/css/eurostile-extended');
+@import 'tailwindcss';
+
+@font-face {
+    font-family: 'Eurostile Extended';
+    font-style: normal;
+    font-weight: 700 900;
+    src: local('Eurostile Extended Black'), local('Eurostile Extended Bold'), local('EurostileExtended-Black'), local('EurostileExtended-Bold'), local('Eurostile Extended'), url('https://fonts.cdnfonts.com/s/22761/EurostileExtendedBlack.woff') format('woff');
+    font-display: swap;
+}
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Eurostile Extended', 'Eurostile Extended Local', 'Michroma', 'Poppins', sans-serif;
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-stat: 'Big Shoulders Display', sans-serif;
+}
+
+.font-heading {
+    font-family: 'Eurostile Extended', 'Eurostile Extended Local', 'Michroma', 'Poppins', sans-serif;
+}
+
+/* Hero title: letter-by-letter reveal on load (shared across pages) */
+@keyframes nx-letter-type {
+    0% {
+        opacity: 0;
+        transform: translateY(28px) scale(0.65);
+        filter: blur(10px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-3px) scale(1.06);
+        filter: blur(0px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0px);
+    }
+}
+.nx-letter {
+    display: inline-block;
+    opacity: 0;
+    animation: nx-letter-type 0.45s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+    will-change: transform, opacity, filter;
+}
+@media (prefers-reduced-motion: reduce) {
+    .nx-letter {
+        animation: none !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Infinite horizontal marquees (tech pills, partner logos, gallery) */
+@keyframes nx-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+.nx-marquee-track {
+    width: max-content;
+    animation-name: nx-marquee;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.nx-marquee-track:hover {
+    animation-play-state: paused;
+}
+
+/* Horizontal chip scroller: functional but visually clean */
+.nx-scroll-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.nx-scroll-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Custom animations & effects */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 0.6; filter: blur(20px); }
+    50% { opacity: 0.9; filter: blur(30px); }
+}
+
+.animate-float {
+    animation: float 5s ease-in-out infinite;
+}
+
+.animate-glow {
+    animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* Glassmorphism helpers */
+.glass-pill {
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-pill-light {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
