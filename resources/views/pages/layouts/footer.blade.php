@@ -1,44 +1,40 @@
-<footer class="bg-[#020514] text-slate-400 pt-16 pb-12 relative overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-900/15 via-transparent to-transparent pointer-events-none"></div>
+@php
+    // Figma footer is laid out at 1886px wide; sizes scale down with the viewport
+    $footerSmall = 'text-[clamp(0.8125rem,0.76vw,0.894rem)] font-medium';
+@endphp
 
-    <!-- Phone icon button at top right -->
-    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative">
-        <a href="tel:+2250171755000" aria-label="Appelez-nous" class="hidden sm:flex absolute top-0 right-6 lg:right-16 w-11 h-11 rounded-full border border-white/20 hover:border-white text-white items-center justify-center transition-all duration-300 hover:scale-105 hover:bg-white/10 z-20">
-            <i class="fa-solid fa-phone text-sm"></i>
-        </a>
-    </div>
+<footer class="relative overflow-hidden bg-[#00050f] text-white font-inter px-4 sm:px-6 lg:px-[clamp(2.25rem,2.65vw,3.125rem)] pt-20 lg:pt-[clamp(5rem,9.9vw,11.625rem)] pb-10 lg:pb-[45px]">
 
     <!-- Decorative brand mark "n" bleeding off the bottom-right corner -->
-    <div class="absolute bottom-0 right-0 h-[90%] w-[45%] max-w-[400px] pointer-events-none select-none overflow-hidden flex items-end justify-end z-0">
-        <img src="{{ asset('assets/img/LOGONEXORA.png') }}" alt="" aria-hidden="true"
-            class="h-full w-full object-contain object-right-bottom translate-x-6 translate-y-2 opacity-95">
+    <div class="pointer-events-none select-none absolute right-0 bottom-0 w-[36.7vw] max-w-[692px] translate-x-[28.5%] translate-y-[13.25%]" aria-hidden="true">
+        <img src="{{ asset('assets/img/figma_footer_mark.svg') }}" alt="" class="block w-full h-auto">
+        <img src="{{ asset('assets/img/figma_footer_mark_flag.svg') }}" alt="" class="absolute -left-px top-0 w-[24.4%] h-auto">
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+    <div class="relative z-10 mx-auto max-w-[1822px]">
 
-        <h2 class="text-white font-heading font-black text-2xl sm:text-4xl uppercase mb-3 tracking-tight">
+        <h2 class="nx-display uppercase whitespace-nowrap text-[clamp(1.25rem,3.7vw,4.375rem)] leading-[0.9]">
             NEXORA DIGITAL SARL
         </h2>
-        <p class="text-blue-500 font-heading font-bold text-3xl sm:text-5xl leading-[1.15] mb-8">
+
+        <p class="mt-10 lg:mt-[clamp(2.5rem,5.3vw,6.25rem)] text-[#0158ff] text-[clamp(2rem,3.7vw,4.375rem)] leading-[1.27]">
             Votre partenaire<br>
             en transformation<br>
             digitale
         </p>
 
-        <div class="border-t border-white/20 w-48 sm:w-64 pt-6 space-y-2 mb-8">
-            <p class="text-white text-base sm:text-lg font-medium">
-                <a href="tel:+2250171755000" class="hover:text-blue-400 transition-colors duration-200">+225 01 71 75 50 00</a>
-            </p>
-            <p class="text-white text-base sm:text-lg font-medium">
-                <a href="mailto:contact@nexora-digital.com" class="hover:text-blue-400 transition-colors duration-200">contact@nexora-digital.com</a>
-            </p>
+        <div class="mt-10 lg:mt-[clamp(2.5rem,6.7vw,7.875rem)] h-px w-full max-w-[609px] sm:w-[clamp(15rem,32.3vw,38.0625rem)] bg-[#d9d9d9]"></div>
+
+        <div class="mt-8 lg:mt-[clamp(1.5rem,3.6vw,4.25rem)] text-[clamp(1.125rem,1.96vw,2.3125rem)] leading-[1.22]">
+            <p><a href="tel:+2250171755000" class="transition-colors duration-200 hover:text-[#0158ff]">+225 01 71 75 50 00</a></p>
+            <p><a href="mailto:contact@nexora-digital.com" class="transition-colors duration-200 hover:text-[#0158ff]">contact@nexora-digital.com</a></p>
         </div>
 
-        <div class="space-y-1.5 mb-8 text-xs text-slate-400">
-            <p><a href="#" class="hover:text-white transition-colors duration-200">Mentions légales</a></p>
-            <p><a href="#" class="hover:text-white transition-colors duration-200">politique de confidentialité</a></p>
-        </div>
+        <ul class="mt-10 lg:mt-[clamp(2rem,3.8vw,4.5rem)] space-y-[25px] leading-[0.9] {{ $footerSmall }}">
+            <li><a href="#" class="transition-colors duration-200 hover:text-[#0158ff]">Mentions légales</a></li>
+            <li><a href="#" class="transition-colors duration-200 hover:text-[#0158ff]">politique de confidentialité</a></li>
+        </ul>
 
-        <p class="text-xs text-slate-500">&copy; {{ date('Y') }} NEXORA DIGITAL SARL</p>
+        <p class="mt-14 lg:mt-[75px] leading-[19.5px] {{ $footerSmall }}">&copy; {{ date('Y') }} NEXORA DIGITAL SARL</p>
     </div>
 </footer>

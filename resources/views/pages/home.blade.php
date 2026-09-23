@@ -7,7 +7,7 @@
     <!-- ============================================================ -->
     <!-- HERO -->
     <!-- ============================================================ -->
-    <section class="relative flex flex-col justify-center gap-10 pt-40 pb-14 px-4 sm:px-8 bg-slate-950 overflow-hidden min-h-screen">
+    <section class="relative flex flex-col justify-center gap-10 pt-52 lg:pt-40 pb-14 px-4 sm:px-8 bg-slate-950 overflow-hidden min-h-screen">
 
         <!-- Background: video + overlays -->
         <div class="absolute inset-0 z-0">

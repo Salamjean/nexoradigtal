@@ -7,7 +7,7 @@
 <!-- ============================================================ -->
 <!-- HERO -->
 <!-- ============================================================ -->
-<section class="relative flex flex-col justify-center gap-8 pt-40 pb-16 px-4 sm:px-8 bg-slate-950 overflow-hidden">
+<section class="relative flex flex-col justify-center gap-8 pt-52 lg:pt-40 pb-16 px-4 sm:px-8 bg-slate-950 overflow-hidden">
 
     <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-b from-[#0d0d0d] via-slate-950 to-blue-950/40"></div>

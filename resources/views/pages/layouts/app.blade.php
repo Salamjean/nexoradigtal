@@ -10,7 +10,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@400;500;600&family=Michroma&display=swap" rel="stylesheet">
 
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -29,6 +29,7 @@
                             heading: ['"Poppins"', 'sans-serif'],
                             montserrat: ['"Montserrat"', 'sans-serif'],
                             stat: ['"Big Shoulders Display"', 'sans-serif'],
+                            inter: ['"Inter"', 'sans-serif'],
                         }
                     }
                 }
@@ -38,8 +39,66 @@
             .font-heading {
                 font-family: 'Poppins', sans-serif;
             }
+            /* Mirror of the hero title letter reveal in resources/css/app.css */
+            @keyframes nx-letter-in {
+                from { opacity: 0; transform: translateY(16px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .nx-letter {
+                display: inline-block;
+                opacity: 0;
+                animation: nx-letter-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            .nx-intro .nx-letter {
+                animation-play-state: paused;
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .nx-letter {
+                    animation: none;
+                    opacity: 1;
+                }
+            }
         </style>
     @endif
+
+    <!-- Display font: Eurostile Extended Bold (Figma titles). Commercial font: drop the licensed
+         file(s) in public/assets/fonts/ as EurostileExtended-Bold.{woff2,woff,otf,ttf} and it is used automatically. -->
+    @php
+        $eurostileSources = collect(['woff2' => 'woff2', 'woff' => 'woff', 'otf' => 'opentype', 'ttf' => 'truetype'])
+            ->filter(fn ($format, $ext) => file_exists(public_path("assets/fonts/EurostileExtended-Bold.$ext")))
+            ->map(fn ($format, $ext) => "url('".asset("assets/fonts/EurostileExtended-Bold.$ext")."') format('$format')")
+            ->prepend("local('Eurostile Extended Bold'), local('EurostileExtended-Bold'), local('Eurostile-BoldExtendedTwo'), local('EurostileLTStd-BoldEx2')")
+            ->implode(', ');
+    @endphp
+    <style>
+        @font-face {
+            font-family: 'Eurostile Extended';
+            src: {!! $eurostileSources !!};
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        .nx-display {
+            font-family: 'Eurostile Extended', 'Michroma', sans-serif;
+            font-weight: 700;
+        }
+        /* Until Eurostile is available, Michroma stands in: thicken it with a stroke to match the Bold weight */
+        html:not(.nx-eurostile) .nx-display {
+            font-weight: 400;
+            -webkit-text-stroke: 0.07em currentColor;
+        }
+    </style>
+    <script>
+        if (document.fonts) {
+            // A missing font rejects the FontFace's own `loaded` promise too: mark it handled
+            document.fonts.forEach(function (face) {
+                if (face.family.indexOf('Eurostile Extended') !== -1) face.loaded.catch(function () {});
+            });
+            document.fonts.load('700 1em "Eurostile Extended"').then(function (faces) {
+                if (faces.length) document.documentElement.classList.add('nx-eurostile');
+            }).catch(function () { /* font not available: keep the Michroma fallback */ });
+        }
+    </script>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white min-h-screen flex flex-col overflow-x-hidden">
 
@@ -84,8 +143,8 @@
             var skip = document.getElementById('nx-preloader-skip');
             if (!overlay || !video) return;
 
-            // Masquer le défilement pendant l'animation
-            document.documentElement.classList.add('overflow-hidden');
+            // Masquer le défilement pendant l'animation (et retenir l'animation des titres jusqu'à la fermeture)
+            document.documentElement.classList.add('overflow-hidden', 'nx-intro');
             document.body.classList.add('overflow-hidden');
 
             // Configuration impérative du mode muet pour contourner les restrictions d'autoplay des navigateurs
@@ -100,8 +159,8 @@
                 if (closed) return;
                 closed = true;
 
-                // Réactiver le défilement
-                document.documentElement.classList.remove('overflow-hidden');
+                // Réactiver le défilement et lancer l'animation des titres
+                document.documentElement.classList.remove('overflow-hidden', 'nx-intro');
                 document.body.classList.remove('overflow-hidden');
 
                 // Effet de fondu de sortie
