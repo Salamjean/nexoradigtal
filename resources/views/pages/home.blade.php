@@ -11,18 +11,19 @@
         class="relative flex flex-col justify-between pt-36 pb-12 px-4 sm:px-8 bg-slate-950 overflow-hidden min-h-screen">
 
         <!-- Background: video + overlays -->
-        <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 z-0 overflow-hidden">
             <!-- Background video -->
-            <video class="absolute inset-0 w-full h-full object-cover"
-                src="{{ asset('assets/video/6036858_Office_People_3840x2160.mp4') }}" autoplay muted loop playsinline
-                aria-hidden="true"></video>
-            <!-- Dark overlay pour la lisibilité -->
-            <div class="absolute inset-0 bg-[#0d0d0d]/70"></div>
+            <video class="absolute inset-0 w-full h-full object-cover pointer-events-none scale-105"
+                autoplay muted loop playsinline preload="auto" onloadedmetadata="this.play()" oncanplay="this.play()">
+                <source src="{{ asset('assets/video/6036858_Office_People_3840x2160.mp4') }}" type="video/mp4">
+            </video>
+            <!-- Subtler dark overlay to let the office people video show through while keeping text readable -->
+            <div class="absolute inset-0 bg-slate-950/45"></div>
             <!-- Gradient bas pour la transition douce -->
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950/80"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-slate-950/30 via-transparent to-slate-950"></div>
             <!-- Glow bleu subtil -->
-            <div class="absolute -top-40 right-0 w-[36rem] h-[36rem] bg-blue-600/10 rounded-full blur-[120px]"></div>
-            <!-- Giant translucent "n" logo watermark on the left (matches mockup) -->
+            <div class="absolute -top-40 right-0 w-[36rem] h-[36rem] bg-blue-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+            <!-- Giant translucent "n" logo watermark on the left -->
             <div class="absolute -left-16 top-1/2 -translate-y-1/2 z-0 pointer-events-none select-none opacity-[0.08]">
                 <img src="{{ asset('assets/img/LOGONEXORA.png') }}" alt=""
                     class="h-[36rem] sm:h-[46rem] w-auto object-contain">
