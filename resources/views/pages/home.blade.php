@@ -200,91 +200,109 @@
     </section>
 
     <!-- ============================================================ -->
-    <!-- HERO BOTTOM - Partenaire section (fond bleu foncé) -->
+    <!-- HERO BOTTOM - Partenaire section (fond bleu royal comme l'image de référence) -->
     <!-- ============================================================ -->
-    <section class="relative bg-[#040d2e] py-16 sm:py-20 px-4 sm:px-8 overflow-hidden">
+    <section class="relative bg-[#1c2b6b] py-14 sm:py-18 px-6 sm:px-12 lg:px-16 overflow-hidden">
 
-        <!-- LinkedIn floating button (top-right) -->
-        <a href="#" aria-label="LinkedIn NEXORA"
-            class="hidden lg:flex absolute top-6 right-6 w-11 h-11 rounded-full bg-blue-600 hover:bg-blue-500 text-white items-center justify-center shadow-lg shadow-blue-600/40 transition-all duration-300 hover:scale-105 z-10">
-            <i class="fa-brands fa-linkedin-in text-base"></i>
+        <!-- Phone floating button (top-right) -->
+        <a href="tel:+22500000000" aria-label="Appelez NEXORA"
+            class="absolute top-6 right-6 sm:top-8 sm:right-10 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#0066ff] hover:bg-blue-500 text-white flex items-center justify-center shadow-lg shadow-blue-600/30 transition-all duration-300 hover:scale-105 z-10">
+            <i class="fa-solid fa-phone text-base"></i>
         </a>
 
-        <!-- Main grid layout: Left for H2 title, Right for paragraph and CTA buttons -->
-        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        <!-- Main content container -->
+        <div class="max-w-7xl mx-auto w-full pt-4">
+            <!-- Grid layout: Left H2 Title, Right Description + CTA Buttons -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
-            <!-- Left: Title H2 only -->
-            <div class="max-w-[623px]">
-                <h2
-                    class="text-white font-heading font-bold uppercase text-[26px] lg:text-[38px] leading-[1.8] tracking-wider">
-                    VOTRE PARTENAIRE EN TRANSFORMATION DIGITALE & INNOVANTES POUR VOTRE ORGANISATION.
-                </h2>
-            </div>
+                <!-- Left: Title H2 -->
+                <div class="max-w-[640px]">
+                    <h2 class="text-white font-heading font-extrabold uppercase text-[24px] sm:text-[32px] lg:text-[36px] leading-[1.3] tracking-wide">
+                        VOTRE PARTENAIRE EN<br>
+                        TRANSFORMATION DIGITALE<br>
+                        & INNOVANTES POUR VOTRE<br>
+                        ORGANISATION.
+                    </h2>
+                </div>
 
-            <!-- Right: Description + CTA buttons -->
-            <div class="max-w-[789px] space-y-8">
-                <p class="text-[#888888] font-montserrat font-light text-[18px] lg:text-[21px] leading-[1.5] text-justify">
-                    NEXORA DIGITAL SARL est votre partenaire de référence en solutions numériques et en transformation
-                    digitale. Nous accompagnons les entreprises et organisations dans leur évolution numérique avec des
-                    solutions adaptées, innovantes et performantes. Chez NEXORA, nos experts qualifiés garantissent des
-                    résultats concrets et durables.
-                </p>
-                <div class="flex flex-wrap items-center gap-4">
-                    <a href="{{ route('service') }}"
-                        class="inline-flex items-center gap-4 pl-6 pr-2 py-2 rounded-full border border-white text-white text-sm font-semibold hover:bg-white hover:text-slate-950 transition-all duration-300 group">
-                        Découvrez nos services
-                        <span class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-location-arrow text-xs text-white rotate-45"></i>
-                        </span>
-                    </a>
-                    <a href="#"
-                        class="inline-flex items-center gap-4 pl-6 pr-2 py-2 rounded-full border border-white/40 text-white text-sm font-semibold hover:border-white transition-all duration-300 group">
-                        Regardez notre vidéo complète
-                        <span class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-location-arrow text-xs text-white rotate-45"></i>
-                        </span>
-                    </a>
+                <!-- Right: Description + CTA buttons -->
+                <div class="max-w-[700px] space-y-6">
+                    <p class="text-blue-100/70 font-sans text-sm sm:text-base leading-relaxed text-left">
+                        NEXORA DIGITAL SARL est votre partenaire de référence en solutions numériques et en transformation
+                        digitale. Nous accompagnons les entreprises et organisations dans leur évolution numérique avec des
+                        solutions adaptées, innovantes et performantes. Chez NEXORA, nos experts qualifiés garantissent des
+                        résultats concrets et durables.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <!-- CTA 1: Découvrez nos services -->
+                        <a href="{{ route('service') }}"
+                            class="inline-flex items-center justify-between gap-4 pl-6 pr-2 py-2 rounded-full border border-white/80 hover:border-white bg-transparent text-white text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 group">
+                            <span>Découvrez nos services</span>
+                            <div class="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                                <img src="{{ asset('assets/img/Ellipse 6.png') }}" alt="" class="absolute inset-0 w-full h-full object-contain">
+                                <img src="{{ asset('assets/img/Vector.png') }}" alt="" class="relative z-10 w-3.5 h-3.5 object-contain">
+                            </div>
+                        </a>
+
+                        <!-- CTA 2: Regardez notre vidéo complète -->
+                        <a href="#"
+                            class="inline-flex items-center justify-between gap-4 pl-6 pr-2 py-2 rounded-full border border-white/80 hover:border-white bg-transparent text-white text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 group">
+                            <span>Regardez notre vidéo complète</span>
+                            <div class="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                                <img src="{{ asset('assets/img/Ellipse 6.png') }}" alt="" class="absolute inset-0 w-full h-full object-contain">
+                                <img src="{{ asset('assets/img/Vector.png') }}" alt="" class="relative z-10 w-3.5 h-3.5 object-contain">
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Horizontal divider line -->
-        <div class="max-w-7xl mx-auto mt-16 border-t border-white/10"></div>
+            <!-- Horizontal divider line with LinkedIn button stuck on the right -->
+            <div class="relative w-full my-12 sm:my-16">
+                <div class="border-t border-white/20 w-full"></div>
+                <!-- LinkedIn square blue button on the far right of the line -->
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn NEXORA"
+                    class="absolute -right-6 sm:-right-12 lg:-right-16 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 bg-[#0066ff] hover:bg-blue-500 text-white font-bold text-xl sm:text-2xl flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-105 z-10">
+                    in
+                </a>
+            </div>
 
-        <!-- Stats Section below the divider -->
-        <div class="max-w-7xl mx-auto w-full pt-12">
-            <div class="flex flex-wrap gap-x-12 gap-y-8 justify-between">
-                @php
-                    $heroStats = [
-                        ['target' => 10, 'suffix' => '+', 'label' => "Ans d'Expertise"],
-                        ['target' => 200, 'suffix' => '+', 'label' => 'Projets Livrés'],
-                        ['target' => 80, 'suffix' => '+', 'label' => 'Clients'],
-                        ['target' => 5, 'suffix' => '', 'label' => 'Secteurs'],
-                    ];
-                @endphp
-                @foreach ($heroStats as $stat)
-                    <div x-data="{
-                                    display: '0{{ $stat['suffix'] }}',
-                                    init() {
-                                        const target = {{ $stat['target'] }};
-                                        const suffix = '{{ $stat['suffix'] }}';
-                                        const duration = 1800;
-                                        let start = null;
-                                        const step = (ts) => {
-                                            if (!start) start = ts;
-                                            const p = Math.min((ts - start) / duration, 1);
-                                            const eased = 1 - Math.pow(1 - p, 3);
-                                            this.display = Math.floor(eased * target) + suffix;
-                                            if (p < 1) { requestAnimationFrame(step); } else { this.display = target + suffix; }
-                                        };
-                                        requestAnimationFrame(step);
-                                    }
-                                }" class="flex flex-col gap-2 min-w-[140px]">
-                        <span class="font-stat font-black text-5xl sm:text-6xl text-white leading-none"
-                            x-text="display">0{{ $stat['suffix'] }}</span>
-                        <span class="font-bold text-[11px] text-blue-400 uppercase tracking-wider">{{ $stat['label'] }}</span>
-                    </div>
-                @endforeach
+            <!-- Stats Section below the divider -->
+            <div class="w-full pt-2">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-left sm:text-center">
+                    @php
+                        $heroStats = [
+                            ['target' => 10, 'suffix' => '+', 'label' => "Ans d'Expertise"],
+                            ['target' => 200, 'suffix' => '+', 'label' => 'Projets Livrés'],
+                            ['target' => 80, 'suffix' => '+', 'label' => 'Clients'],
+                            ['target' => 5, 'suffix' => '', 'label' => 'Secteurs'],
+                        ];
+                    @endphp
+                    @foreach ($heroStats as $stat)
+                        <div x-data="{
+                                        display: '0{{ $stat['suffix'] }}',
+                                        init() {
+                                            const target = {{ $stat['target'] }};
+                                            const suffix = '{{ $stat['suffix'] }}';
+                                            const duration = 1800;
+                                            let start = null;
+                                            const step = (ts) => {
+                                                if (!start) start = ts;
+                                                const p = Math.min((ts - start) / duration, 1);
+                                                const eased = 1 - Math.pow(1 - p, 3);
+                                                this.display = Math.floor(eased * target) + suffix;
+                                                if (p < 1) { requestAnimationFrame(step); } else { this.display = target + suffix; }
+                                            };
+                                            requestAnimationFrame(step);
+                                        }
+                                    }" class="flex flex-col items-start sm:items-center justify-center">
+                            <span class="font-stat font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-none"
+                                x-text="display">0{{ $stat['suffix'] }}</span>
+                            <span class="text-[10px] sm:text-xs font-semibold text-blue-300/80 uppercase tracking-widest mt-2">{{ $stat['label'] }}</span>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
