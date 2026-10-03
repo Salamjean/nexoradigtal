@@ -10,7 +10,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@700;900&family=Michroma&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@700;900&family=Michroma&display=swap" rel="stylesheet">
     <link href="{{ asset('assets/fonts/monument.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/fonts/eurostile.css') }}" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/monument-extended" rel="stylesheet">
@@ -30,7 +30,8 @@
                     extend: {
                         fontFamily: {
                             sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-                            heading: ['"Monument Extended"', '"Eurostile Extended"', '"Eurostile Extended Local"', '"Michroma"', '"Poppins"', 'sans-serif'],
+                            heading: ['"Eurostile Extended"', '"Monument Extended"', '"Michroma"', '"Poppins"', 'sans-serif'],
+                            eurostile: ['"Eurostile Extended"', 'sans-serif'],
                             montserrat: ['"Montserrat"', 'sans-serif'],
                             stat: ['"Big Shoulders Display"', 'sans-serif'],
                         }
@@ -39,8 +40,8 @@
             }
         </script>
         <style>
-            .font-heading {
-                font-family: 'Monument Extended', 'Eurostile Extended', 'Michroma', 'Poppins', sans-serif !important;
+            .font-heading, .font-eurostile {
+                font-family: 'Eurostile Extended', sans-serif !important;
             }
             @keyframes nx-letter-type {
                 0% {
@@ -124,19 +125,6 @@
     <!-- Alpine.js / Custom Interactions Script -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @stack('scripts')
-
-    <!-- Fixed Floating Action Buttons (Cookie & Call) - Enlarged & Aligned on bottom-6 horizontal line -->
-    <div class="fixed bottom-6 left-4 sm:left-8 z-50">
-        <button type="button" aria-label="Gestion des cookies" class="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center shadow-xl shadow-blue-600/40 transition-all duration-300 hover:scale-110 focus:outline-none">
-            <i class="fa-solid fa-cookie-bite text-lg sm:text-xl"></i>
-        </button>
-    </div>
-
-    <div class="fixed bottom-6 right-4 sm:right-8 z-50">
-        <a href="tel:+2250171755000" aria-label="Appelez-nous" class="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center shadow-xl shadow-blue-600/40 transition-all duration-300 hover:scale-110 flex">
-            <i class="fa-solid fa-phone text-lg sm:text-xl"></i>
-        </a>
-    </div>
 
 </body>
 

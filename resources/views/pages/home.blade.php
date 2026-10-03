@@ -217,7 +217,8 @@
 
                 <!-- Left: Title H2 -->
                 <div class="max-w-[640px]">
-                    <h2 class="text-white font-heading font-extrabold uppercase text-[24px] sm:text-[32px] lg:text-[36px] leading-[1.3] tracking-wide">
+                    <h2 class="text-white font-eurostile font-bold uppercase text-[22px] sm:text-[26px] lg:text-[30px] leading-[1.8] tracking-wider"
+                        style="font-family: 'Eurostile Extended', sans-serif; font-size: 30px; font-weight: 700; line-height: 180%; color: #FFFFFF;">
                         VOTRE PARTENAIRE EN<br>
                         TRANSFORMATION DIGITALE<br>
                         & INNOVANTES POUR VOTRE<br>
@@ -226,8 +227,9 @@
                 </div>
 
                 <!-- Right: Description + CTA buttons -->
-                <div class="max-w-[700px] space-y-6">
-                    <p class="text-blue-100/70 font-sans text-sm sm:text-base leading-relaxed text-left">
+                <div class="max-w-[789px] space-y-6">
+                    <p class="font-montserrat font-light text-[16px] lg:text-[21px] leading-[1.5] text-justify text-[#888888]"
+                        style="font-family: 'Montserrat', sans-serif; font-size: 21px; font-weight: 300; line-height: 150%; color: #888888; text-align: justify;">
                         NEXORA DIGITAL SARL est votre partenaire de référence en solutions numériques et en transformation
                         digitale. Nous accompagnons les entreprises et organisations dans leur évolution numérique avec des
                         solutions adaptées, innovantes et performantes. Chez NEXORA, nos experts qualifiés garantissent des
@@ -406,10 +408,12 @@
         <div class="grid grid-cols-1 lg:grid-cols-2">
             <div class="order-2 lg:order-1 bg-[#253a90] px-6 sm:px-12 lg:px-16 py-16 sm:py-20 flex flex-col justify-center">
                 <span class="text-blue-300 text-sm font-medium mb-3">Services</span>
-                <h2 class="text-white font-heading font-extrabold text-2xl sm:text-3xl tracking-tight leading-snug mb-6">
+                <h2 class="text-white font-eurostile font-bold uppercase text-[22px] sm:text-[26px] lg:text-[30px] leading-[1.8] tracking-wider mb-6"
+                    style="font-family: 'Eurostile Extended', sans-serif; font-size: 30px; font-weight: 700; line-height: 180%; color: #FFFFFF;">
                     DES EXPERTS QUALIFIES AU SERVICE DE VOTRE TRANSFORMATION DIGITALE ET DE VOS PROJETS INNOVANT.
                 </h2>
-                <p class="text-blue-100/70 text-base sm:text-lg leading-relaxed">
+                <p class="font-sans font-light text-[16px] lg:text-[21px] leading-[33px] text-justify text-[#888888]"
+                    style="font-family: 'Inter', sans-serif; font-size: 21px; font-weight: 300; line-height: 33px; color: #888888; text-align: justify;">
                     NEXORA est votre partenaire spécialisé dans les solutions digitales de A à Z. Nous maîtrisons une gamme
                     complète de technologies avancées, notamment le développement web & mobile, l'intégration ERP,
                     l'automatisation des processus, la digitalisation des organisations et le conseil en stratégie digitale.
@@ -422,18 +426,22 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent"></div>
 
                 <!-- Floating detail card -->
-                <div class="relative z-10 bg-white rounded-[28px] p-6 sm:p-8 shadow-2xl max-w-sm w-full">
-                    <span class="text-blue-600 font-montserrat text-sm">Nos services</span>
-                    <h3 class="font-heading font-bold text-lg text-slate-950 mt-2 mb-3">PLATEFORMES WEB & MOBILES</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                        Nous développons des applications web et mobile sur mesure, performantes et adaptées à vos besoins
-                        métiers, avec une expérience utilisateur optimale et une sécurité renforcée.
-                    </p>
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-slate-900 font-montserrat font-medium text-sm">1/5</span>
+                <div class="relative z-10 bg-white rounded-[32px] p-7 sm:p-9 shadow-2xl max-w-md w-full text-center flex flex-col justify-between min-h-[440px]">
+                    <div>
+                        <span class="text-blue-600 font-montserrat text-xs sm:text-sm font-medium block text-center mb-3">Nos services</span>
+                        <h3 class="font-heading font-bold text-base sm:text-lg text-slate-950 text-center uppercase tracking-wide mb-4">PLATEFORMES WEB & MOBILES</h3>
+                        <p class="font-montserrat font-light text-xs sm:text-[13px] leading-[1.65] text-justify text-slate-700">
+                            Nous développons des applications web et mobile sur mesure, performantes et adaptées à vos besoins
+                            métiers, avec une expérience utilisateur optimale et une sécurité renforcée.
+                        </p>
                     </div>
-                    <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
-                        <div class="bg-blue-600 h-full rounded-full" style="width: 22%"></div>
+                    <div class="mt-6 w-full text-left">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-slate-900 font-montserrat font-medium text-xs">1/5</span>
+                        </div>
+                        <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-blue-600 h-full rounded-full" style="width: 22%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -451,41 +459,44 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent"></div>
 
                 <!-- Floating detail card -->
-                <div class="relative z-10 bg-white rounded-[28px] p-6 sm:p-8 shadow-2xl max-w-sm w-full">
-                    <span class="text-blue-600 font-montserrat text-sm">Déploiement & formation</span>
-                    <h3 class="font-heading font-bold text-lg text-slate-950 mt-2 mb-3">CONDUITE DU CHANGEMENT</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                        NEXORA accompagne vos équipes dans la prise en main des nouveaux outils digitaux, pour garantir une
-                        adoption réussie des solutions déployées et une montée en compétence durable. Nous assurons
-                        également la conduite du changement pour faciliter la transition digitale au sein de votre
-                        organisation.
-                    </p>
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-slate-900 font-montserrat font-medium text-sm">1/5</span>
+                <div class="relative z-10 bg-white rounded-[32px] p-7 sm:p-9 shadow-2xl max-w-md w-full text-center flex flex-col justify-between min-h-[440px]">
+                    <div>
+                        <span class="text-blue-600 font-montserrat text-xs sm:text-sm font-medium block text-center mb-3">Déploiement & formation</span>
+                        <h3 class="font-heading font-bold text-base sm:text-lg text-slate-950 text-center uppercase tracking-wide mb-4">CONDUITE DU CHANGEMENT</h3>
+                        <p class="font-montserrat font-light text-xs sm:text-[13px] leading-[1.65] text-justify text-slate-700">
+                            NEXORA accompagne vos équipes dans la prise en main des nouveaux outils digitaux. Nous proposons à chaque profil, pour garantir une adoption réussie des solutions déployées et une montée en compétence durable. Nous assurons également la conduite du changement pour faciliter la transition digitale au sein de votre organisation.
+                        </p>
                     </div>
-                    <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
-                        <div class="bg-blue-600 h-full rounded-full" style="width: 22%"></div>
+                    <div class="mt-6 w-full text-left">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-slate-900 font-montserrat font-medium text-xs">1/5</span>
+                        </div>
+                        <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-blue-600 h-full rounded-full" style="width: 22%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="bg-[#253a90] px-6 sm:px-12 lg:px-16 py-16 sm:py-20 flex flex-col justify-center">
                 <span class="text-blue-300 text-sm font-medium mb-3">Services</span>
-                <h2 class="text-white font-heading font-extrabold text-2xl sm:text-3xl tracking-tight leading-snug mb-6">
+                <h2 class="text-white font-eurostile font-bold uppercase text-[22px] sm:text-[26px] lg:text-[30px] leading-[1.8] tracking-wider mb-6"
+                    style="font-family: 'Eurostile Extended', sans-serif; font-size: 30px; font-weight: 700; line-height: 180%; color: #FFFFFF;">
                     INVESTIR DANS L'EXPERTISE DIGITALE, C'EST GARANTIR LE SUCCES DE VOTRE TRANSFORMATION
                 </h2>
-                <p class="text-blue-100/70 text-base sm:text-lg leading-relaxed mb-8">
+                <p class="font-sans font-light text-[16px] lg:text-[21px] leading-[33px] text-justify text-[#888888] mb-8"
+                    style="font-family: 'Inter', sans-serif; font-size: 21px; font-weight: 300; line-height: 33px; color: #888888; text-align: justify;">
                     NEXORA s'engage à être votre partenaire de référence en matière de transformation digitale. Nos experts
                     sont notre atout le plus précieux et nous investissons massivement pour garantir leur excellence dans
                     les domaines du digital, du conseil et de la conduite du changement, au service de vos projets et de
                     votre organisation.
                 </p>
                 <a href="{{ route('contact') }}"
-                    class="inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full border-2 border-white/50 text-white text-sm font-semibold hover:border-white transition-all duration-300 group self-start">
-                    Découvrez nos programmes de formation
-                    <span
-                        class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-blue-950 transition">
-                        <i class="fa-solid fa-arrow-right text-xs"></i>
-                    </span>
+                    class="inline-flex items-center justify-between gap-4 pl-6 pr-2 py-2 rounded-full border border-white/80 hover:border-white bg-transparent text-white text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 group self-start">
+                    <span>Découvrez nos programmes de formation</span>
+                    <div class="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                        <img src="{{ asset('assets/img/Ellipse 6.png') }}" alt="" class="absolute inset-0 w-full h-full object-contain">
+                        <img src="{{ asset('assets/img/Vector.png') }}" alt="" class="relative z-10 w-3.5 h-3.5 object-contain">
+                    </div>
                 </a>
             </div>
         </div>
