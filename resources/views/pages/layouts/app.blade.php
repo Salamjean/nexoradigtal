@@ -10,11 +10,11 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@700;900&family=Michroma&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@700;900&family=Manrope:wght@700&family=Michroma&display=swap" rel="stylesheet">
     <link href="{{ asset('assets/fonts/monument.css') }}" rel="stylesheet">
+    <!-- Eurostile Extended: local copy only (the cdnfonts.com file has a corrupt cmap table that Chrome/Edge reject) -->
     <link href="{{ asset('assets/fonts/eurostile.css') }}" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/monument-extended" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/eurostile-extended" rel="stylesheet">
 
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -34,6 +34,8 @@
                             eurostile: ['"Eurostile Extended"', 'sans-serif'],
                             montserrat: ['"Montserrat"', 'sans-serif'],
                             stat: ['"Big Shoulders Display"', 'sans-serif'],
+                            inter: ['"Inter"', 'sans-serif'],
+                            manrope: ['"Manrope"', 'sans-serif'],
                         }
                     }
                 }

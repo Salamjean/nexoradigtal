@@ -4,102 +4,107 @@
 
 @section('content')
 
-<!-- ============================================================ -->
-<!-- HERO -->
-<!-- ============================================================ -->
-<section class="relative flex flex-col justify-center gap-10 pt-40 pb-16 px-4 sm:px-8 bg-slate-950 overflow-hidden">
+@php
+    /*
+     * Reproduces the Figma frame "Qui somme nosu ?" (221:1111), laid out at 1886px wide.
+     * Desktop measurements use "u" units: --u = 1/1886 of the page width (see home.blade.php).
+     */
+    $team = [
+        ['img' => 'figma_about_member_serge.jpg', 'name' => 'Serge Kadio', 'role' => ['Directeur Général'], 'patch' => true],
+        ['img' => 'figma_about_member_carlos.jpg', 'name' => 'Carlos Riodan', 'role' => ['Directeur des Opérations Digitales']],
+        ['img' => 'figma_about_member_fabiola.jpg', 'name' => 'Fabiola Khy', 'role' => ['PMP, ITIL v4, AWS Certified', 'Responsable Sécurité &', 'Conformité SI'], 'pin' => true],
+        ['img' => 'figma_about_member_salam.jpg', 'name' => 'Salam Chedour', 'role' => ['Responsable Commercial & Contrats']],
+        ['img' => 'figma_about_member_innes.jpg', 'name' => 'Innes Excellencia', 'role' => ['Responsable Projets Infrastructure']],
+        ['img' => 'figma_about_member_khogo.jpg', 'name' => 'Khogo Soro', 'role' => ['Responsable Projets Infrastructure']],
+    ];
+@endphp
 
-    <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0d0d0d] via-slate-950 to-blue-950/40"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent"></div>
-        <div class="absolute -top-40 right-0 w-[36rem] h-[36rem] bg-blue-600/10 rounded-full blur-[120px]"></div>
-    </div>
+@include('pages.partials.figma-motion')
 
-    <div class="relative z-10 max-w-7xl mx-auto w-full text-center">
-        <h1 class="text-white font-heading font-bold text-[clamp(1.25rem,5.8vw,7.1875rem)] uppercase leading-[0.9] whitespace-nowrap drop-shadow-[0_15px_35px_rgba(0,0,0,0.8)] select-none">
-            @php $heroLetters = str_split('QUI SOMMES NOUS ?'); @endphp
-            @foreach ($heroLetters as $i => $char)
-                <span class="nx-letter" style="animation-delay: {{ $i * 0.025 }}s">{{ $char === ' ' ? "\u{00A0}" : $char }}</span>
-            @endforeach
-        </h1>
-        <div class="mt-6 max-w-3xl mx-auto">
-            <div class="w-28 h-px bg-blue-600 mb-3 mx-auto"></div>
-            <p class="font-montserrat text-[#888] text-base sm:text-lg leading-relaxed">
+<style>
+    /* Blue fade at the bottom of each portrait (Figma "Rectangle 80-88" overlays) */
+    .nxa-portrait-shade {
+        background-image: linear-gradient(179.23deg, rgba(1, 88, 255, 0.07) 30.535%, rgba(1, 85, 245, 0.08) 34.184%, rgba(1, 77, 223, 0.1) 42.064%, rgba(1, 70, 202, 0.12) 49.796%, rgba(1, 61, 178, 0.14) 58.419%, rgba(1, 62, 180, 0.16) 68.976%, rgba(1, 66, 191, 0.18) 77.897%, rgba(1, 70, 204, 0.18) 81.911%, rgba(1, 57, 166, 0.2) 90.879%, rgba(1, 55, 159, 0.3) 95.189%, rgba(1, 54, 156, 0.4) 97.344%, rgba(1, 53, 155, 0.5) 98.421%, rgba(1, 53, 154, 0.6) 98.96%, rgba(1, 53, 153, 0.7) 99.499%);
+    }
+</style>
+
+<!-- Page background = Figma frame fill (#0158FF at 6%) over black -->
+<div class="[container-type:inline-size] [--u:calc(100cqw/1886)] bg-[#00050f] font-inter text-white overflow-hidden lg:pb-[calc(41*var(--u))]">
+
+    <!-- ============================================================ -->
+    <!-- HERO -->
+    <!-- ============================================================ -->
+    <section class="nxh-hero relative overflow-hidden px-4 sm:px-6 pt-52 pb-12 lg:px-0 lg:pb-0 lg:pt-[calc(352*var(--u))] lg:h-[calc(909*var(--u))]">
+        <video class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+            <source src="{{ asset('assets/video/0_Person_Protective_Suit_3840x2160.mp4') }}" type="video/mp4">
+        </video>
+
+        <!-- Decorative brand mark "n" (top-left) -->
+        <img src="{{ asset('assets/img/figma_about_hero_mark.svg') }}" alt="" aria-hidden="true"
+            class="pointer-events-none select-none absolute top-0 left-[calc(-175*var(--u))] w-[calc(708*var(--u))] opacity-30">
+
+        <div class="relative lg:pl-[calc(24*var(--u))]">
+            <h1 class="font-eurostile font-bold uppercase whitespace-nowrap leading-[0.9] text-[calc(100*var(--u))] lg:text-[calc(115*var(--u))]" aria-label="QUI SOMME NOUS ?">
+                {{-- Letters on one line: whitespace between inline-block spans would render as extra spaces --}}
+                @foreach (mb_str_split('QUI SOMME NOUS ?') as $i => $char)<span class="nxh-letter" style="animation-delay: {{ number_format($i * 0.16, 2) }}s" aria-hidden="true">{{ $char === ' ' ? "\u{00A0}" : $char }}</span>@endforeach
+            </h1>
+            <div class="mt-1 w-28 h-px bg-[#0158ff] lg:mt-0 lg:ml-[calc(10*var(--u))] lg:w-[calc(112*var(--u))]"></div>
+            <p class="mt-2.5 max-w-[800px] font-montserrat text-[#666] leading-[1.6] text-base lg:mt-[calc(9*var(--u))] lg:ml-[calc(11*var(--u))] lg:max-w-none lg:w-[calc(800*var(--u))] lg:text-[max(14px,calc(20*var(--u)))]">
                 Depuis une décennie, NEXORA DIGITAL SARL accompagne les leaders africains dans leur quête d'excellence technologique.
             </p>
         </div>
-    </div>
 
-    <!-- Team avatars pill -->
-    <div class="relative z-10 max-w-7xl mx-auto w-full">
-        <div class="inline-flex bg-slate-900/60 backdrop-blur-xl border border-white/20 rounded-full px-4 sm:px-5 py-2.5 items-center gap-3 sm:gap-4 shadow-2xl hover:border-white/30 transition-all duration-300">
-            <div class="flex -space-x-3 overflow-hidden">
-                <img src="{{ asset('assets/img/avatar1.png') }}" alt="Membre equipe 1" class="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-slate-900 object-cover">
-                <img src="{{ asset('assets/img/avatar2.png') }}" alt="Membre equipe 2" class="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-slate-900 object-cover">
-                <img src="{{ asset('assets/img/avatar3.png') }}" alt="Membre equipe 3" class="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-slate-900 object-cover">
-                <img src="{{ asset('assets/img/avatar4.png') }}" alt="Membre equipe 4" class="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-slate-900 object-cover">
-                <img src="{{ asset('assets/img/avatar5.png') }}" alt="Membre equipe 5" class="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-slate-900 object-cover">
-            </div>
-            <span class="text-white text-xs sm:text-sm font-medium tracking-wide">
-                Decouvrez l'equipe derriere NEXORA
-            </span>
-        </div>
-    </div>
+        @include('pages.partials.hero-team-pill', ['cookie' => 'figma_about_cookie.svg'])
+    </section>
 
-    <!-- Team professional intro panel -->
-    <div class="relative z-10 max-w-7xl mx-auto w-full mt-4">
-        <div class="rounded-[28px] bg-blue-600/30 border border-blue-500/20 overflow-hidden grid grid-cols-1 lg:grid-cols-2">
-            <div class="relative h-72 lg:h-auto">
-                <img src="{{ asset('assets/img/figma_about_team_photo.png') }}" alt="Équipe NEXORA au bureau" class="absolute inset-0 w-full h-full object-cover">
-            </div>
-            <div class="px-6 sm:px-10 py-10 sm:py-14 flex flex-col justify-center">
-                <span class="text-white/80 text-sm font-medium mb-3">Notre équipe</span>
-                <h2 class="text-white font-heading font-extrabold text-2xl sm:text-3xl tracking-tight leading-snug mb-6">
-                    UNE EQUIPE PROFESSIONNELLE
-                </h2>
-                <p class="text-white/70 text-base leading-relaxed mb-8">
-                    La force de NEXORA réside dans la qualité de ses talents. Notre équipe dirigeante s'engage à bâtir l'excellence numérique de demain en conjuguant avec passion l'expertise de nos consultants seniors à l'ambition et à l'audace de nos jeunes talents, unis pour accélérer la transformation digitale en Afrique.
-                </p>
-                <a href="#equipe" class="inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full border border-white/60 text-white text-sm font-semibold hover:bg-white hover:text-slate-950 transition-all duration-300 group self-start">
-                    Découvrez l'équipe de direction
-                    <span class="w-9 h-9 rounded-full bg-white/10 group-hover:bg-slate-950 group-hover:text-white flex items-center justify-center transition">
-                        <i class="fa-solid fa-arrow-right text-xs"></i>
+    <!-- ============================================================ -->
+    <!-- NOTRE EQUIPE (#DDDDDD at 13%) -->
+    <!-- ============================================================ -->
+    <section class="bg-[#dddddd]/[0.13] px-4 sm:px-6 py-12 lg:px-0 lg:pt-[calc(76*var(--u))] lg:pb-[calc(68*var(--u))]">
+        <div class="overflow-hidden rounded-3xl bg-[#0158ff]/[0.37] flex flex-col lg:flex-row lg:ml-[calc(34*var(--u))] lg:w-[calc(1829*var(--u))] lg:min-h-[calc(921*var(--u))] lg:rounded-[calc(29*var(--u))]">
+            <img src="{{ asset('assets/img/figma_about_team_photo.jpg') }}" alt="L'équipe NEXORA au bureau"
+                class="w-full h-72 sm:h-96 object-cover lg:h-auto lg:w-[calc(908*var(--u))] lg:shrink-0">
+
+            <div class="p-6 sm:p-10 lg:p-0 lg:pl-[calc(74*var(--u))] lg:pt-[calc(99*var(--u))] lg:pb-[calc(60*var(--u))]">
+                <p class="font-medium leading-[1.21] text-lg lg:text-[max(14px,calc(21*var(--u)))]">Notre équipe</p>
+                <h2 class="mt-6 font-eurostile font-bold uppercase leading-[1.8] text-[22px] lg:mt-[calc(51*var(--u))] lg:whitespace-nowrap lg:text-[max(16px,calc(30*var(--u)))]">UNE EQUIPE PROFESSIONNELLE</h2>
+                <p class="mt-8 font-light text-[#888] text-justify whitespace-pre-wrap leading-[1.571] text-base lg:mt-[calc(57*var(--u))] lg:w-[calc(726*var(--u))] lg:text-[max(13px,calc(21*var(--u)))]">La force de NEXORA réside dans la qualité de ses talents. Notre équipe dirigeante s'engage à bâtir l'excellence numérique de demain en conjuguant  avec passion l'expertise de nos consultants seniors à l'ambition  et à l'audace de nos jeunes talents, unis pour accélérer la transformation  digitale en Afrique.</p>
+                <a href="#equipe" class="mt-8 inline-flex items-center justify-between gap-4 h-14 rounded-full border border-white pl-6 pr-4 font-medium text-[15px] whitespace-nowrap transition-shadow duration-300 hover:shadow-[0_0_20px_4px_rgba(1,88,255,0.45)] lg:mt-[calc(74*var(--u))] lg:h-[calc(66*var(--u))] lg:min-w-[calc(354*var(--u))] lg:pl-[calc(30*var(--u))] lg:pr-[calc(6*var(--u))] lg:text-[max(12px,calc(17.5*var(--u)))]">
+                    Découvrez l’équipe de direction
+                    <span class="flex shrink-0 items-center justify-center w-6 lg:w-[calc(22*var(--u))]">
+                        <img src="{{ asset('assets/img/figma_home_btn_flag.svg') }}" alt="" class="w-3.5 h-auto rotate-[73.96deg] lg:w-[calc(17.47*var(--u))]">
                     </span>
                 </a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ============================================================ -->
-<!-- EQUIPE DE DIRECTION -->
-<!-- ============================================================ -->
-<section id="equipe" class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
-            @php
-                $team = [
-                    ['img' => 'figma_about_team_1.png', 'name' => 'Serge Kadio', 'role' => 'Directeur Général'],
-                    ['img' => 'figma_about_team_3.png', 'name' => 'Carlos Riodan', 'role' => 'Directeur des Opérations Digitales'],
-                    ['img' => 'figma_about_team_5.png', 'name' => 'Fabiola Khy', 'role' => 'Responsable Sécurité & Conformité SI', 'sub' => 'PMP, ITIL v4, AWS Certified'],
-                    ['img' => 'figma_about_team_2.png', 'name' => 'Salam Chedour', 'role' => 'Responsable Commercial & Contrats'],
-                    ['img' => 'figma_about_team_4.png', 'name' => 'Innes Excellencia', 'role' => 'Responsable Projets Infrastructure'],
-                    ['img' => 'figma_about_team_6.png', 'name' => 'Khogo Soro', 'role' => 'Responsable Projets Infrastructure'],
-                ];
-            @endphp
+    <!-- ============================================================ -->
+    <!-- EQUIPE DE DIRECTION (white) -->
+    <!-- ============================================================ -->
+    <section id="equipe" class="scroll-mt-8 bg-white text-black px-4 sm:px-6 py-12 lg:px-0 lg:pt-[calc(74*var(--u))] lg:pb-0">
+        <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-[repeat(3,calc(557*var(--u)))] lg:gap-x-[calc(14.5*var(--u))] lg:gap-y-[calc(29*var(--u))] lg:ml-[calc(86*var(--u))]">
             @foreach ($team as $member)
-                <div class="group">
-                    <div class="rounded-[24px] overflow-hidden bg-slate-100 aspect-[4/5]">
-                        <img src="{{ asset('assets/img/'.$member['img']) }}" alt="{{ $member['name'] }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <article class="lg:min-h-[calc(926*var(--u))]">
+                    <div class="relative overflow-hidden rounded-[32px] aspect-[557/743] lg:aspect-auto lg:h-[calc(743*var(--u))] lg:rounded-[calc(32*var(--u))]">
+                        <img src="{{ asset('assets/img/' . $member['img']) }}" alt="{{ $member['name'] }}" class="absolute inset-0 w-full h-full object-cover">
+                        @if (!empty($member['patch']))
+                            <!-- Figma patch covering a mark on the photo -->
+                            <span class="absolute left-[90.13%] top-[93.81%] w-[6.64%] aspect-square bg-[#342f29]" aria-hidden="true"></span>
+                        @endif
+                        @if (!empty($member['pin']))
+                            <img src="{{ asset('assets/img/figma_about_pin_logo.svg') }}" alt="" aria-hidden="true" class="absolute left-[51.71%] top-[66.49%] w-[4.67%] h-auto">
+                        @endif
+                        <span class="nxa-portrait-shade absolute inset-0" aria-hidden="true"></span>
                     </div>
-                    <h3 class="text-slate-950 text-2xl font-medium mt-5">{{ $member['name'] }}</h3>
-                    <p class="text-slate-500 text-sm mt-1">{{ $member['role'] }}</p>
-                    @if (!empty($member['sub']))
-                        <p class="text-slate-400 text-xs mt-0.5">{{ $member['sub'] }}</p>
-                    @endif
-                </div>
+                    <h3 class="mt-5 leading-[1.21] text-3xl lg:mt-[calc(25*var(--u))] lg:text-[calc(35*var(--u))]">{{ $member['name'] }}</h3>
+                    <p class="mt-2 font-medium leading-[1.524] text-lg lg:mt-[calc(11*var(--u))] lg:text-[max(13px,calc(21*var(--u)))]">{!! collect($member['role'])->map(fn ($line) => e($line))->implode('<br>') !!}</p>
+                </article>
             @endforeach
         </div>
-    </div>
-</section>
+    </section>
+</div>
+
+@include('pages.partials.phone-button', ['pulse' => 'nxh-phone-3'])
+
 @endsection

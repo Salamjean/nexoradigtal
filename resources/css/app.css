@@ -1,12 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@700;900&family=Michroma&display=swap');
-@import url('https://fonts.cdnfonts.com/css/eurostile-extended');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@700&family=Michroma&display=swap');
 @import 'tailwindcss';
 
 @font-face {
     font-family: 'Eurostile Extended';
     font-style: normal;
     font-weight: 700 900;
-    src: local('Eurostile Extended Black'), local('Eurostile Extended Bold'), local('EurostileExtended-Black'), local('EurostileExtended-Bold'), local('Eurostile Extended'), url('https://fonts.cdnfonts.com/s/22761/EurostileExtendedBlack.woff') format('woff');
+    src: local('Eurostile Extended Black'), local('Eurostile Extended Bold'), local('EurostileExtended-Black'), local('EurostileExtended-Bold'), local('Eurostile Extended'), url('/assets/fonts/EurostileExtendedBlack.woff') format('woff');
     font-display: swap;
 }
 
@@ -15,6 +14,9 @@
     --font-heading: 'Eurostile Extended', 'Eurostile Extended Local', 'Michroma', 'Poppins', sans-serif;
     --font-montserrat: 'Montserrat', sans-serif;
     --font-stat: 'Big Shoulders Display', sans-serif;
+    --font-eurostile: 'Eurostile Extended', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+    --font-manrope: 'Manrope', sans-serif;
 }
 
 .font-heading {
