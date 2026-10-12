@@ -42,6 +42,14 @@
             }
         </script>
         <style>
+            /* Site cursor: NEXORA flag (Vector.png with a thin dark outline so it stays visible on white sections).
+               Text fields keep the text cursor. The "html :is(...)" selector outranks Tailwind's button/cursor-* rules. */
+            html, html body, html :is(a, button, label, select, summary, [role="button"], [type="checkbox"], [type="file"]) {
+                cursor: url('{{ asset('assets/img/cursor-nexora.png') }}') 2 2, auto;
+            }
+            html :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), textarea) {
+                cursor: text;
+            }
             .font-heading, .font-eurostile {
                 font-family: 'Eurostile Extended', sans-serif !important;
             }

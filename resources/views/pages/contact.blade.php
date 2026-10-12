@@ -136,7 +136,7 @@
                                 <textarea id="{{ $id }}" name="{{ $field['name'] }}" placeholder="{{ $placeholder }}" @required($field['required'] ?? false)
                                     class="block w-full h-56 resize-none bg-transparent border-b-2 border-[#d9d9d9] font-medium text-white placeholder:text-white leading-[1.21] text-lg outline-none transition-colors focus:border-[#0158ff] lg:h-[calc(var(--h)*var(--u))] lg:text-[max(14px,calc(26*var(--u)))]">{{ session('contact_form') === $type ? old('message') : '' }}</textarea>
                             @elseif ($kind === 'file')
-                                <label for="{{ $id }}" class="flex cursor-pointer items-center justify-between gap-4 border-b-2 border-[#d9d9d9] pb-4 font-medium leading-[1.21] text-lg transition-colors hover:border-[#0158ff] lg:pb-[calc(var(--pb)*var(--u))] lg:text-[max(14px,calc(26*var(--u)))]">
+                                <label for="{{ $id }}" class="flex items-center justify-between gap-4 border-b-2 border-[#d9d9d9] pb-4 font-medium leading-[1.21] text-lg transition-colors hover:border-[#0158ff] lg:pb-[calc(var(--pb)*var(--u))] lg:text-[max(14px,calc(26*var(--u)))]">
                                     <span x-text="file || @js($field['label'])">{{ $field['label'] }}</span>
                                     <img src="{{ asset('assets/img/figma_contact_download.svg') }}" alt="" class="shrink-0 w-10 -my-2 lg:w-[calc(59*var(--u))] lg:-my-[calc(14*var(--u))] lg:-mr-[calc(7*var(--u))]">
                                 </label>
@@ -155,7 +155,7 @@
                     <!-- Consent -->
                     <label style="--consent: {{ $form['consent'] }}" class="mt-8 block font-medium leading-[1.538] text-base lg:mt-[calc(var(--consent)*var(--u))] lg:ml-[calc(25*var(--u))] lg:w-[calc(1317*var(--u))] lg:text-[max(13px,calc(26*var(--u)))]">
                         <input type="checkbox" name="consent" value="1" required
-                            class="appearance-none inline-block align-[-0.1em] w-4 h-4 mr-2 rounded-[2px] bg-[#d9d9d9] cursor-pointer transition-colors checked:bg-[#0158ff] checked:shadow-[inset_0_0_0_3px_#d9d9d9] lg:w-[calc(21*var(--u))] lg:h-[calc(21*var(--u))] lg:mr-[calc(7*var(--u))]">En soumettant ce formulaire, vous acceptez notre Politique de confidentialité et consentez à la collecte <br class="hidden lg:inline">et à l'utilisation de vos données personnelles afin de répondre à votre demande. Nous respectons votre <br class="hidden lg:inline">vie privée et ne partagerons pas vos informations avec des tiers sans votre consentement.
+                            class="appearance-none inline-block align-[-0.1em] w-4 h-4 mr-2 rounded-[2px] bg-[#d9d9d9] transition-colors checked:bg-[#0158ff] checked:shadow-[inset_0_0_0_3px_#d9d9d9] lg:w-[calc(21*var(--u))] lg:h-[calc(21*var(--u))] lg:mr-[calc(7*var(--u))]">En soumettant ce formulaire, vous acceptez notre Politique de confidentialité et consentez à la collecte <br class="hidden lg:inline">et à l'utilisation de vos données personnelles afin de répondre à votre demande. Nous respectons votre <br class="hidden lg:inline">vie privée et ne partagerons pas vos informations avec des tiers sans votre consentement.
                     </label>
                     @if ($errors_->has('consent'))
                         <p class="mt-2 text-sm text-[#ff6b6b] lg:ml-[calc(25*var(--u))]">{{ $errors_->first('consent') }}</p>
