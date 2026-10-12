@@ -10,12 +10,13 @@
  *   title_x   extra left offset of the title
  *   paras     [gap above the paragraph, text]
  *   glow      blue glow overlay on the main image
+ *   tab       label of the category pill under the hero (same order as this file)
  *   img       image prefix: public/assets/img/figma_svc_{img}_main.jpg and _g1/_g2/_g3.jpg (gallery, left to right)
  */
 
 return [
     'web-mobile' => [
-        'name' => 'Plateforme web & mobile',
+        'name' => 'Plateforme web & mobile', 'tab' => 'Web & Mobile',
         'title' => 'PLATEFORME WEB & MOBILE',
         'label' => 155, 'title_gap' => 52.6, 'title_x' => 9,
         'paras' => [
@@ -26,7 +27,7 @@ return [
         'img' => 'web',
     ],
     'erp' => [
-        'name' => 'ERP & Systèmes d’information',
+        'name' => 'ERP & Systèmes d’information', 'tab' => 'ERP',
         'title' => 'ERP & SYSTEMES D’INFORMATION',
         'label' => 165, 'title_gap' => 52.6, 'title_x' => 9,
         'paras' => [
@@ -37,7 +38,7 @@ return [
         'img' => 'erp',
     ],
     'automatisation-ia' => [
-        'name' => 'Automatisation & IA',
+        'name' => 'Automatisation & IA', 'tab' => 'Automatisation & IA',
         // The Figma frame has no title here; same title style and position as the other pages
         'title' => 'AUTOMATISATION & IA',
         'label' => 165, 'title_gap' => 52.6, 'title_x' => 0,
@@ -48,7 +49,7 @@ return [
         'img' => 'ia',
     ],
     'audit' => [
-        'name' => 'Audit SI & AMOA',
+        'name' => 'Audit SI & AMOA', 'tab' => 'Audit',
         'title' => 'AUDIT SI & AMOA',
         'label' => 165, 'title_gap' => 52.6, 'title_x' => 2,
         'paras' => [
@@ -58,7 +59,7 @@ return [
         'img' => 'audit',
     ],
     'conseil' => [
-        'name' => 'Conseil & transformation',
+        'name' => 'Conseil & transformation', 'tab' => 'Infrastructure',
         'title' => 'CONSEIL & TRANSFORMATION',
         'label' => 165, 'title_gap' => 39.6, 'title_x' => 0,
         'paras' => [
@@ -69,7 +70,7 @@ return [
         'img' => 'conseil',
     ],
     'btp' => [
-        'name' => 'BTP & fournitures matériel IT',
+        'name' => 'BTP & fournitures matériel IT', 'tab' => 'BTP',
         'title' => 'BTP & FORNITURES MATERIEL IT',
         'label' => 165, 'title_gap' => 49.6, 'title_x' => 0,
         'paras' => [

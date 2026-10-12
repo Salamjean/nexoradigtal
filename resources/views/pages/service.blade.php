@@ -12,11 +12,6 @@
      * Reproduces the Figma frame "Services" (496:3850), laid out at 1886px wide.
      * Desktop measurements use "u" units: --u = 1/1886 of the page width (see home.blade.php).
      */
-    // Category tabs: one per service page (config/nexora_services.php), the first one highlighted as in Figma
-    $tabs = [];
-    foreach (['web-mobile' => 'Web & Mobile', 'erp' => 'ERP', 'automatisation-ia' => 'Automatisation & IA', 'audit' => 'Audit', 'conseil' => 'Infrastructure', 'btp' => 'BTP'] as $slug => $label) {
-        $tabs[] = ['label' => $label, 'href' => route('service.show', $slug), 'active' => $slug === 'web-mobile'];
-    }
 
     // Carousel cards, in the Figma order (the track starts scrolled so the 2nd card sits at x=189)
     $cards = [
@@ -79,7 +74,8 @@
     <!-- ============================================================ -->
     <!-- HERO -->
     <!-- ============================================================ -->
-    @include('pages.partials.services-hero', ['tabs' => $tabs])
+    {{-- Category tabs come from config/nexora_services.php; the first one is highlighted as in Figma --}}
+    @include('pages.partials.services-hero', ['activeTab' => 'web-mobile'])
 
     <!-- ============================================================ -->
     <!-- NOS SERVICES - Intro panel (#0158FF at 50%) -->

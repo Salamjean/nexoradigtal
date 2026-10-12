@@ -1,9 +1,15 @@
 {{--
     "NOS SERVICES" hero shared by the Services page (496:3850) and the six service pages (486:950...).
-    Params: $tabs (array of ['label', 'href', 'active']) - category pills under the subtitle (Services page only),
+    Params: $activeTab (slug from config/nexora_services.php) - highlighted category pill; the pills link to the service pages,
             $teamPill (bool) - "Découvrez l'équipe derrière NEXORA" pill (service pages only).
     Needs the figma-motion partial for the letter reveal and a parent defining --u.
 --}}
+@php
+    $tabs = [];
+    foreach (config('nexora_services') as $slug => $service) {
+        $tabs[] = ['label' => $service['tab'], 'href' => route('service.show', $slug), 'active' => $slug === ($activeTab ?? null)];
+    }
+@endphp
 <section class="nxh-hero relative overflow-hidden px-4 sm:px-6 pt-52 pb-12 lg:px-0 lg:pb-0 lg:pt-[calc(352*var(--u))] lg:h-[calc(909*var(--u))]">
     <video class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" autoplay muted loop playsinline preload="auto" aria-hidden="true">
         <source src="{{ asset('assets/video/1107905_1080p_4k_3840x2160.mp4') }}" type="video/mp4">
@@ -28,7 +34,7 @@
             <nav aria-label="Catégories de services"
                 class="mt-8 flex gap-3 overflow-x-auto nx-scroll-hide [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:overflow-visible lg:mt-[calc(41*var(--u))] lg:ml-[calc(7*var(--u))] lg:gap-[calc(12*var(--u))]">
                 @foreach ($tabs as $tab)
-                    <a href="{{ $tab['href'] }}"
+                    <a href="{{ $tab['href'] }}" @if ($tab['active']) aria-current="page" @endif
                         class="{{ $tab['active'] ? 'bg-[#1a6bff]' : 'bg-[#111] hover:bg-[#1a6bff]/30' }} shrink-0 rounded-full border border-[#1a6bff] px-[23px] py-[11px] font-manrope font-bold uppercase leading-[1.366] whitespace-nowrap text-[13px] transition-colors duration-200 lg:px-[calc(23*var(--u))] lg:py-[calc(11*var(--u))] lg:text-[max(11px,calc(14*var(--u)))]">
                         {{ $tab['label'] }}
                     </a>

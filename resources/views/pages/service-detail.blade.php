@@ -24,7 +24,7 @@
     <!-- ============================================================ -->
     <!-- HERO -->
     <!-- ============================================================ -->
-    @include('pages.partials.services-hero', ['teamPill' => true])
+    @include('pages.partials.services-hero', ['teamPill' => true, 'activeTab' => $service['slug']])
 
     <!-- ============================================================ -->
     <!-- INTRO: "Nos services" + title + text + "Contactez NEXORA" -->
