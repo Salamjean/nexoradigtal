@@ -1,14 +1,16 @@
 {{--
     "NOS SERVICES" hero shared by the Services page (496:3850) and the six service pages (486:950...).
-    Params: $activeTab (slug from config/nexora_services.php) - highlighted category pill; the pills link to the service pages,
+    Params: $activeTab (service page slug) - highlighted category pill; the pills link to the service pages
+                (labels edited in /admin/services),
             $teamPill (bool) - "Découvrez l'équipe derrière NEXORA" pill (service pages only).
     Needs the figma-motion partial for the letter reveal and a parent defining --u.
 --}}
 @php
-    $tabs = [];
-    foreach (config('nexora_services') as $slug => $service) {
-        $tabs[] = ['label' => $service['tab'], 'href' => route('service.show', $slug), 'active' => $slug === ($activeTab ?? null)];
-    }
+    $tabs = \App\Models\ServicePage::ordered()->map(fn ($page) => [
+        'label' => $page->tab_label,
+        'href' => route('service.show', $page->slug),
+        'active' => $page->slug === ($activeTab ?? null),
+    ]);
 @endphp
 <section class="nxh-hero relative overflow-hidden px-4 sm:px-6 pt-52 pb-12 lg:px-0 lg:pb-0 lg:pt-[calc(352*var(--u))] lg:h-[calc(909*var(--u))]">
     <video class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" autoplay muted loop playsinline preload="auto" aria-hidden="true">
@@ -26,7 +28,7 @@
         </h1>
         <div class="mt-1 w-28 h-px bg-[#0158ff] lg:mt-0 lg:ml-[calc(10*var(--u))] lg:w-[calc(112*var(--u))]"></div>
         <p class="mt-2.5 max-w-[800px] font-montserrat text-[#666] leading-[1.6] text-base lg:mt-[calc(9*var(--u))] lg:ml-[calc(11*var(--u))] lg:max-w-none lg:w-[calc(800*var(--u))] lg:text-[max(14px,calc(20*var(--u)))]">
-            Depuis une décennie, NEXORA DIGITAL SARL accompagne les leaders africains dans leur quête d'excellence technologique.
+            {{ Site::get('hero_subtitle') }}
         </p>
 
         @if (! empty($tabs))

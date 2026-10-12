@@ -14,20 +14,18 @@
 
     <div class="relative z-10">
         <h2 class="font-eurostile font-bold uppercase whitespace-nowrap text-[clamp(1.25rem,3.7vw,4.375rem)] leading-[0.9]">
-            NEXORA DIGITAL SARL
+            {{ Site::get('company_name') }}
         </h2>
 
         <p class="mt-10 lg:mt-[clamp(2.5rem,5.3vw,6.25rem)] text-[#0158ff] text-[clamp(2rem,3.7vw,4.375rem)] leading-[1.27]">
-            Votre partenaire<br>
-            en transformation<br>
-            digitale
+            {!! collect(Site::lines('footer_tagline'))->map(fn ($line) => e($line))->implode('<br>') !!}
         </p>
 
         <div class="mt-10 lg:mt-[clamp(2.5rem,6.7vw,7.875rem)] h-px w-full max-w-[609px] sm:w-[clamp(15rem,32.3vw,38.0625rem)] bg-[#d9d9d9]"></div>
 
         <div class="mt-8 lg:mt-[clamp(1.5rem,3.6vw,4.25rem)] text-[clamp(1.125rem,1.96vw,2.3125rem)] leading-[1.22]">
-            <p><a href="tel:+2250171755000" class="transition-colors duration-200 hover:text-[#0158ff]">+225 01 71 75 50 00</a></p>
-            <p><a href="mailto:contact@nexora-digital.com" class="transition-colors duration-200 hover:text-[#0158ff]">contact@nexora-digital.com</a></p>
+            <p><a href="{{ Site::tel('phone_mobile') }}" class="transition-colors duration-200 hover:text-[#0158ff]">{{ Site::get('phone_mobile') }}</a></p>
+            <p><a href="mailto:{{ Site::get('email_contact') }}" class="transition-colors duration-200 hover:text-[#0158ff]">{{ Site::get('email_contact') }}</a></p>
         </div>
 
         <ul class="mt-10 lg:mt-[clamp(2rem,3.8vw,4.5rem)] space-y-[25px] leading-[0.9] {{ $footerSmall }}">
@@ -35,6 +33,6 @@
             <li><a href="#" class="transition-colors duration-200 hover:text-[#0158ff]">politique de confidentialité</a></li>
         </ul>
 
-        <p class="mt-14 lg:mt-[75px] leading-[19.5px] {{ $footerSmall }}">&copy; {{ date('Y') }} NEXORA DIGITAL SARL</p>
+        <p class="mt-14 lg:mt-[75px] leading-[19.5px] {{ $footerSmall }}">&copy; {{ date('Y') }} {{ Site::get('company_name') }}</p>
     </div>
 </footer>

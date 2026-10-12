@@ -53,7 +53,7 @@
             <h1 class="font-eurostile font-bold uppercase whitespace-nowrap leading-[0.9] text-[calc(92*var(--u))] lg:text-[calc(115*var(--u))]">HISTOIRE ET HERITAGE</h1>
             <div class="mt-1 w-28 h-px bg-[#0158ff] lg:mt-0 lg:ml-[calc(10*var(--u))] lg:w-[calc(112*var(--u))]"></div>
             <p class="mt-2.5 max-w-[800px] font-montserrat text-[#666] leading-[1.6] text-base lg:mt-[calc(9*var(--u))] lg:ml-[calc(11*var(--u))] lg:max-w-none lg:w-[calc(800*var(--u))] lg:text-[max(14px,calc(20*var(--u)))]">
-                Depuis une décennie, NEXORA DIGITAL SARL accompagne les leaders africains dans leur quête d'excellence technologique.
+                {{ Site::get('hero_subtitle') }}
             </p>
         </div>
 

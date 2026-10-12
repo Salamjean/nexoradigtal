@@ -9,25 +9,32 @@
      * Reproduces the Figma frame "Projets réalisés" (488:1771), laid out at 1886px wide.
      * Desktop measurements use "u" units: --u = 1/1886 of the page width (see home.blade.php).
      *
-     * Project rows repeat every 737px. Per row: x = image left (the Figma rows drift 2px to the left each time),
-     * t = title top in the row, tx = title offset from the details column, title lines are split with "\n",
-     * and the value colours follow the frame (muted / grey / white).
+     * Project rows (edited in /admin/projets) repeat every 737px. The Figma styling of the first five rows is kept by position:
+     * x = image left (the Figma rows drift 2px to the left each time), t = title top in the row (by number of lines),
+     * tx = title offset from the details column, and the value colours (muted / grey / white). Extra rows use the defaults.
      */
     $muted = 'text-[#888]/[0.53]';
     $grey = 'text-[#888]';
     $white = 'text-white';
-    $projects = [
-        ['img' => 'figma_proj_sifca.jpg', 'x' => 95, 't' => 20, 'tx' => -7, 'title' => 'DEPLOIEMENT ERP-GROUPE SIFCA',
-            'date' => ["Janvier 2024 à aujourd'hui", $muted], 'client' => ['Groupe SIFCA', $grey], 'by' => ['NEXORA DIGITAL SARL', $white]],
-        ['img' => 'figma_proj_bollore.jpg', 'x' => 93, 't' => 9, 'tx' => -1, 'title' => "PLATEFORME RH-BOLLORE AFRICA\nLOGISTICS",
-            'date' => ['Mars 2023 à décembre 2023', $grey], 'client' => ['Bolloré Africa Logistics', $grey], 'by' => ['NEXORA DIGITAL SARL', $grey]],
-        ['img' => 'figma_proj_finances.jpg', 'x' => 91, 't' => 7, 'tx' => -1, 'title' => "DEMATHERIALISATION - MINISTERE\nDES FINANCES",
-            'date' => ['Juin 2023 – En cours', $grey], 'client' => ['Ministère des Finances CI', $grey], 'by' => ['NEXORA DIGITAL SARL', $white]],
-        ['img' => 'figma_proj_orange.jpg', 'x' => 89, 't' => 20, 'tx' => 1, 'title' => "INFRASTRUCTURE IT-ORANGE COTE\nD’IVOIRE",
-            'date' => ['Septembre 2022 (en cours)', $grey], 'client' => ["Orange Côte d'Ivoire", $grey], 'by' => ['NEXORA DIGITAL SARL', $grey]],
-        ['img' => 'figma_proj_egov.jpg', 'x' => 87, 't' => 39, 'tx' => 2, 'title' => 'PORTAIL E-GOUVERNEMENT-DGBF',
-            'date' => ['Avril 2022 à janvier 2024', $grey], 'client' => ['Direction Générale du Budget', $grey], 'by' => ['NEXORA DIGITAL SARL', $grey]],
+    $styles = [
+        ['tx' => -7, 'colors' => [$muted, $grey, $white]],
+        ['tx' => -1, 'colors' => [$grey, $grey, $grey]],
+        ['tx' => -1, 'colors' => [$grey, $grey, $white]],
+        ['tx' => 1, 'colors' => [$grey, $grey, $grey]],
+        ['tx' => 2, 'colors' => [$grey, $grey, $grey]],
     ];
+    $rows = $projects->values()->map(function ($project, $i) use ($styles, $grey, $white) {
+        $title = str_replace(["\r\n", "\r"], "\n", trim($project->title));
+        $lines = substr_count($title, "\n") + 1;
+        $style = $styles[$i] ?? ['tx' => -1, 'colors' => [$grey, $grey, $white]];
+        // Figma title tops: one line at +20 (+39 on the last row), two lines at +9 / +7 / +20
+        $t = [20, 9, 7, 20, 39][$i] ?? ($lines > 1 ? 9 : 20);
+
+        return [
+            'img' => $project->imageUrl(), 'x' => max(95 - 2 * $i, 75), 't' => $t, 'tx' => $style['tx'], 'title' => $title, 'lines' => $lines,
+            'date' => [$project->period, $style['colors'][0]], 'client' => [$project->client, $style['colors'][1]], 'by' => [$project->provider, $style['colors'][2]],
+        ];
+    });
 @endphp
 
 @include('pages.partials.figma-motion')
@@ -52,9 +59,9 @@
     <!-- ETUDE DE CAS VEDETTE -->
     <!-- ============================================================ -->
     <section class="relative px-4 sm:px-6 pt-14 lg:px-0 lg:pl-[calc(94*var(--u))] lg:pt-[calc(230*var(--u))] lg:min-h-[calc(641*var(--u))]">
-        <p class="font-medium leading-[1.21] text-lg lg:text-[max(14px,calc(21*var(--u)))]">Étude de cas vedette</p>
-        <h2 class="mt-4 font-eurostile font-bold uppercase leading-[1.3] text-[23px] sm:text-[32px] lg:leading-[1.8] lg:mt-[calc(54.6*var(--u))] lg:-ml-px lg:text-[max(20px,calc(40*var(--u)))]">PORTAIL E-SERVICE DGBF</h2>
-        <p class="mt-5 font-medium text-[#888] text-justify leading-[1.21] text-base lg:mt-[calc(37*var(--u))] lg:w-[calc(1119*var(--u))] lg:text-[max(13px,calc(20.8*var(--u)))]">Étude de cas : Accélérer la transformation numérique d'une institution publique à fort volume transactionnel Le projet de portail e-Services pour la Direction Générale du Budget et des Finances (DGBF) de Côte d'Ivoire représente une initiative stratégique de modernisation des services publics. NEXORA DIGITAL SARL a été mandatée pour concevoir et déployer une plateforme intégrée permettant la dématérialisation des procédures budgétaires et l'automatisation des workflows de validation…</p>
+        <p class="font-medium leading-[1.21] text-lg lg:text-[max(14px,calc(21*var(--u)))]">{{ Site::get('case_label') }}</p>
+        <h2 class="mt-4 font-eurostile font-bold uppercase leading-[1.3] text-[23px] sm:text-[32px] lg:leading-[1.8] lg:mt-[calc(54.6*var(--u))] lg:-ml-px lg:text-[max(20px,calc(40*var(--u)))]">{{ Site::get('case_title') }}</h2>
+        <p class="mt-5 font-medium text-[#888] text-justify leading-[1.21] text-base lg:mt-[calc(37*var(--u))] lg:w-[calc(1119*var(--u))] lg:text-[max(13px,calc(20.8*var(--u)))]">{{ Site::get('case_text') }}</p>
 
         <a href="{{ route('contact') }}"
             class="mt-8 inline-flex items-center justify-between gap-4 h-14 rounded-full border border-white pl-6 pr-2 font-medium text-[15px] whitespace-nowrap transition-shadow duration-300 hover:shadow-[0_0_20px_4px_rgba(1,88,255,0.45)] lg:mt-0 lg:absolute lg:left-[calc(1494*var(--u))] lg:top-[calc(476*var(--u))] lg:h-[calc(65*var(--u))] lg:min-w-[calc(301*var(--u))] lg:pl-[calc(26*var(--u))] lg:pr-[calc(7*var(--u))] lg:text-[max(12px,calc(17.2*var(--u)))]">
@@ -66,7 +73,7 @@
     </section>
 
     <div class="px-4 sm:px-6 mt-10 lg:mt-0 lg:px-0 lg:pl-[calc(93*var(--u))]">
-        <img src="{{ asset('assets/img/figma_proj_dgbf.jpg') }}" alt="Portail e-Service DGBF"
+        <img src="{{ \App\Support\Media::url(Site::get('case_image')) }}" alt="{{ Site::get('case_title') }}"
             class="w-full h-60 sm:h-96 object-cover rounded-3xl lg:w-[calc(1701*var(--u))] lg:h-[calc(744*var(--u))] lg:rounded-[calc(29*var(--u))]">
     </div>
 
@@ -74,10 +81,10 @@
     <!-- PROJECT ROWS -->
     <!-- ============================================================ -->
     <section class="px-4 sm:px-6 pt-14 pb-16 lg:px-0 lg:pt-[calc(84*var(--u))] lg:pb-[calc(82*var(--u))]">
-        @foreach ($projects as $i => $project)
-            <article class="{{ $i > 0 ? 'mt-12 lg:mt-[calc(49*var(--u))]' : '' }} lg:ml-[calc(var(--x)*var(--u))]" style="--x: {{ $project['x'] }}; --t: {{ $project['t'] }}; --tx: {{ $project['tx'] }}; --lines: {{ substr_count($project['title'], "\n") + 1 }}">
+        @foreach ($rows as $i => $project)
+            <article class="{{ $i > 0 ? 'mt-12 lg:mt-[calc(49*var(--u))]' : '' }} lg:ml-[calc(var(--x)*var(--u))]" style="--x: {{ $project['x'] }}; --t: {{ $project['t'] }}; --tx: {{ $project['tx'] }}; --lines: {{ $project['lines'] }}">
                 <div class="flex flex-col gap-8 lg:flex-row lg:gap-0">
-                    <img src="{{ asset('assets/img/' . $project['img']) }}" alt="{{ str_replace("\n", ' ', $project['title']) }}" loading="lazy"
+                    <img src="{{ $project['img'] }}" alt="{{ str_replace("\n", ' ', $project['title']) }}" loading="lazy"
                         class="w-full aspect-[849/637] object-cover rounded-3xl lg:shrink-0 lg:aspect-auto lg:w-[calc(849*var(--u))] lg:h-[calc(637*var(--u))] lg:rounded-[calc(29*var(--u))]">
 
                     <div class="lg:ml-[calc(75*var(--u))] lg:w-[calc(774*var(--u))]">

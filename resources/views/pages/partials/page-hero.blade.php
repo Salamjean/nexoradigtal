@@ -22,7 +22,7 @@
         </h1>
         <div class="mt-1 w-28 h-px bg-[#0158ff] lg:mt-0 lg:ml-[calc((34_-_var(--tx))*var(--u))] lg:w-[calc(112*var(--u))]"></div>
         <p class="mt-2.5 max-w-[800px] font-montserrat text-[#666] leading-[1.6] text-base lg:mt-[calc(9*var(--u))] lg:ml-[calc((35_-_var(--tx))*var(--u))] lg:max-w-none lg:w-[calc(800*var(--u))] lg:text-[max(14px,calc(20*var(--u)))]">
-            Depuis une décennie, NEXORA DIGITAL SARL accompagne les leaders africains dans leur quête d'excellence technologique.
+            {{ Site::get('hero_subtitle') }}
         </p>
 
         @if (! empty($pills))

@@ -9,14 +9,9 @@
      * Reproduces the Figma frame "Qui somme nosu ?" (221:1111), laid out at 1886px wide.
      * Desktop measurements use "u" units: --u = 1/1886 of the page width (see home.blade.php).
      */
-    $team = [
-        ['img' => 'figma_about_member_serge.jpg', 'name' => 'Serge Kadio', 'role' => ['Directeur Général'], 'patch' => true],
-        ['img' => 'figma_about_member_carlos.jpg', 'name' => 'Carlos Riodan', 'role' => ['Directeur des Opérations Digitales']],
-        ['img' => 'figma_about_member_fabiola.jpg', 'name' => 'Fabiola Khy', 'role' => ['PMP, ITIL v4, AWS Certified', 'Responsable Sécurité &', 'Conformité SI'], 'pin' => true],
-        ['img' => 'figma_about_member_salam.jpg', 'name' => 'Salam Chedour', 'role' => ['Responsable Commercial & Contrats']],
-        ['img' => 'figma_about_member_innes.jpg', 'name' => 'Innes Excellencia', 'role' => ['Responsable Projets Infrastructure']],
-        ['img' => 'figma_about_member_khogo.jpg', 'name' => 'Khogo Soro', 'role' => ['Responsable Projets Infrastructure']],
-    ];
+    // $team: members from the database (edited in /admin/equipe). The Figma photo patches belong to the original photos.
+    $patchPhoto = 'assets/img/figma_about_member_serge.jpg';
+    $pinPhoto = 'assets/img/figma_about_member_fabiola.jpg';
 @endphp
 
 @include('pages.partials.figma-motion')
@@ -50,7 +45,7 @@
             </h1>
             <div class="mt-1 w-28 h-px bg-[#0158ff] lg:mt-0 lg:ml-[calc(10*var(--u))] lg:w-[calc(112*var(--u))]"></div>
             <p class="mt-2.5 max-w-[800px] font-montserrat text-[#666] leading-[1.6] text-base lg:mt-[calc(9*var(--u))] lg:ml-[calc(11*var(--u))] lg:max-w-none lg:w-[calc(800*var(--u))] lg:text-[max(14px,calc(20*var(--u)))]">
-                Depuis une décennie, NEXORA DIGITAL SARL accompagne les leaders africains dans leur quête d'excellence technologique.
+                {{ Site::get('hero_subtitle') }}
             </p>
         </div>
 
@@ -87,18 +82,18 @@
             @foreach ($team as $member)
                 <article class="lg:min-h-[calc(926*var(--u))]">
                     <div class="relative overflow-hidden rounded-[32px] aspect-[557/743] lg:aspect-auto lg:h-[calc(743*var(--u))] lg:rounded-[calc(32*var(--u))]">
-                        <img src="{{ asset('assets/img/' . $member['img']) }}" alt="{{ $member['name'] }}" class="absolute inset-0 w-full h-full object-cover">
-                        @if (!empty($member['patch']))
+                        <img src="{{ $member->photoUrl() }}" alt="{{ $member->name }}" class="absolute inset-0 w-full h-full object-cover">
+                        @if ($member->photo === $patchPhoto)
                             <!-- Figma patch covering a mark on the photo -->
                             <span class="absolute left-[90.13%] top-[93.81%] w-[6.64%] aspect-square bg-[#342f29]" aria-hidden="true"></span>
                         @endif
-                        @if (!empty($member['pin']))
+                        @if ($member->photo === $pinPhoto)
                             <img src="{{ asset('assets/img/figma_about_pin_logo.svg') }}" alt="" aria-hidden="true" class="absolute left-[51.71%] top-[66.49%] w-[4.67%] h-auto">
                         @endif
                         <span class="nxa-portrait-shade absolute inset-0" aria-hidden="true"></span>
                     </div>
-                    <h3 class="mt-5 leading-[1.21] text-3xl lg:mt-[calc(25*var(--u))] lg:text-[calc(35*var(--u))]">{{ $member['name'] }}</h3>
-                    <p class="mt-2 font-medium leading-[1.524] text-lg lg:mt-[calc(11*var(--u))] lg:text-[max(13px,calc(21*var(--u)))]">{!! collect($member['role'])->map(fn ($line) => e($line))->implode('<br>') !!}</p>
+                    <h3 class="mt-5 leading-[1.21] text-3xl lg:mt-[calc(25*var(--u))] lg:text-[calc(35*var(--u))]">{{ $member->name }}</h3>
+                    <p class="mt-2 font-medium leading-[1.524] text-lg lg:mt-[calc(11*var(--u))] lg:text-[max(13px,calc(21*var(--u)))]">{!! collect($member->roleLines())->map(fn ($line) => e($line))->implode('<br>') !!}</p>
                 </article>
             @endforeach
         </div>

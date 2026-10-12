@@ -71,19 +71,19 @@
                 <div class="lg:ml-[calc(81*var(--u))] lg:w-[calc(524*var(--u))]">
                     <p class="leading-[1.21] text-base lg:text-[max(12px,calc(23*var(--u)))]">Adresse</p>
                     <address class="not-italic mt-3 leading-[1.406] text-xl lg:mt-[calc(26*var(--u))] lg:-ml-px lg:text-[max(14px,calc(32*var(--u)))]">
-                        2ème étage<br>Immeuble NEXORA Center<br>Boulevard de la Paix<br>Zone du Plateau<br>Abidjan<br>Côte d'Ivoire<br>01 BP 1234
+                        {!! collect(Site::lines('address'))->map(fn ($line) => e($line))->implode('<br>') !!}
                     </address>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Boulevard+de+la+Paix+Plateau+Abidjan" target="_blank" rel="noopener"
+                    <a href="{{ Site::get('maps_url') }}" target="_blank" rel="noopener"
                         aria-label="Voir l'adresse sur Google Maps"
                         class="mt-5 block w-16 h-16 rounded-full bg-[#0158ff] transition-transform duration-300 hover:scale-105 lg:mt-[calc(19*var(--u))] lg:-ml-[calc(3.5*var(--u))] lg:w-[calc(91*var(--u))] lg:h-[calc(91*var(--u))]"></a>
                 </div>
                 <dl class="leading-[1.21]">
                     <dt class="leading-[1.21] text-base lg:text-[max(12px,calc(23*var(--u)))]">Adresse email</dt>
-                    <dd class="leading-[1.21] mt-2 text-xl lg:mt-[calc(32.2*var(--u))] lg:text-[max(14px,calc(32*var(--u)))]"><a href="mailto:contact@nexora-digital.com" class="transition-colors hover:text-[#0158ff]">contact@nexora-digital.com</a></dd>
+                    <dd class="leading-[1.21] mt-2 text-xl lg:mt-[calc(32.2*var(--u))] lg:text-[max(14px,calc(32*var(--u)))]"><a href="mailto:{{ Site::get('email_contact') }}" class="transition-colors hover:text-[#0158ff]">{{ Site::get('email_contact') }}</a></dd>
                     <dt class="leading-[1.21] mt-5 text-base lg:mt-[calc(24.3*var(--u))] lg:ml-[calc(3*var(--u))] lg:text-[max(12px,calc(23*var(--u)))]">Carrières</dt>
-                    <dd class="leading-[1.21] mt-2 text-xl lg:mt-[calc(33.2*var(--u))] lg:ml-[calc(3*var(--u))] lg:text-[max(14px,calc(32*var(--u)))]"><a href="mailto:recrutement@nexora-digital.com" class="transition-colors hover:text-[#0158ff]">recrutement@nexora-digital.com</a></dd>
+                    <dd class="leading-[1.21] mt-2 text-xl lg:mt-[calc(33.2*var(--u))] lg:ml-[calc(3*var(--u))] lg:text-[max(14px,calc(32*var(--u)))]"><a href="mailto:{{ Site::get('email_careers') }}" class="transition-colors hover:text-[#0158ff]">{{ Site::get('email_careers') }}</a></dd>
                     <dt class="leading-[1.21] mt-5 text-base lg:mt-[calc(26.3*var(--u))] lg:ml-[calc(3*var(--u))] lg:text-[max(12px,calc(23*var(--u)))]">Numéro de téléphone</dt>
-                    <dd class="leading-[1.21] mt-2 text-xl lg:mt-[calc(31.2*var(--u))] lg:ml-[calc(3*var(--u))] lg:text-[max(14px,calc(32*var(--u)))]"><a href="tel:+2252722400000" class="transition-colors hover:text-[#0158ff]">+225 27 22 40 00 00</a></dd>
+                    <dd class="leading-[1.21] mt-2 text-xl lg:mt-[calc(31.2*var(--u))] lg:ml-[calc(3*var(--u))] lg:text-[max(14px,calc(32*var(--u)))]"><a href="{{ Site::tel('phone_office') }}" class="transition-colors hover:text-[#0158ff]">{{ Site::get('phone_office') }}</a></dd>
                 </dl>
             </div>
             <!-- Map with the NEXORA "n" marker -->

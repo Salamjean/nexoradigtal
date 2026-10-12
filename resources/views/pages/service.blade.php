@@ -13,52 +13,34 @@
      * Desktop measurements use "u" units: --u = 1/1886 of the page width (see home.blade.php).
      */
 
-    // Carousel cards, in the Figma order (the track starts scrolled so the 2nd card sits at x=189)
-    $cards = [
-        ['title' => 'Plateforme web & mobile', 'slug' => 'web-mobile'],
-        ['title' => 'ERP 1 Système d’information', 'slug' => 'erp'],
-        ['title' => 'Automatisation & IA', 'slug' => 'automatisation-ia'],
-        ['title' => 'Audit SI & AMOA', 'slug' => 'audit'],
-        ['title' => 'Conseil et transformation', 'slug' => 'conseil'],
-    ];
+    // Carousel cards, in the Figma order (the track starts scrolled so the 2nd card sits at x=189); titles edited in /admin/services
+    $cards = $pages->filter(fn ($page) => filled($page->card_title))
+        ->map(fn ($page) => ['title' => $page->card_title, 'slug' => $page->slug])->values();
 
     /*
-     * Service blocks. Vertical offsets come from the Figma frame:
+     * Service blocks: texts and images come from the database ($pages, edited in /admin/services).
+     * Vertical offsets come from the Figma frame:
      * top = gap above the row, title = title offset in the row, para/link = gaps in the text column,
      * img = image top offset in the row, x = extra image offset (1039 vs 1043), sep = gap before the separator.
      */
-    $services = [
-        [
-            'id' => 'svc-web-mobile', 'slug' => 'web-mobile', 'title' => 'PLATEFORME WEB &MOBILE', 'size' => 40, 'img' => 'figma_service_web.jpg', 'h' => 394,
-            'top' => 0, 'pt' => 0, 'para' => 50, 'link' => 64, 'imgTop' => 3, 'x' => 0, 'sep' => 35,
-            'text' => "NEXORA conçoit et développe des plateformes web et applications mobiles sur mesure, couvrant l'intégralité du cycle produit. De la conception UX/UI au déploiement en production, nous assurons le développement front-end et back-end, ainsi que les intégrations API et l'architecture cloud. Nos solutions sont conçues pour la performance, la sécurité et la scalabilité sur les marchés africains et internationaux.",
-        ],
-        [
-            'id' => 'svc-erp', 'slug' => 'erp', 'title' => 'ERP SYSTEMES D’INFORMATION', 'size' => 35, 'img' => 'figma_service_web.jpg', 'h' => 394,
-            'top' => 79, 'pt' => 20, 'para' => 31, 'link' => 75, 'imgTop' => 0, 'x' => 0, 'sep' => 155,
-            'text' => "NEXORA déploie et paramètre des systèmes ERP adaptés à vos processus métiers, en s'appuyant sur les meilleures solutions du marché. Nous accompagnons la migration de vos outils vers des environnements intégrés qui centralisent vos données, automatisent vos flux et optimisent votre pilotage opérationnel. Nos consultants assurent une adoption fluide et un transfert de compétences durable vers vos équipes. Nous couvrons les modules clés : finance, RH, logistique, CRM et gestion de projets.",
-        ],
-        [
-            'id' => 'svc-automation', 'slug' => 'automatisation-ia', 'title' => 'AUTOMATISATION & IA', 'size' => 40, 'img' => 'figma_service_ia.jpg', 'h' => 394,
-            'top' => 75, 'pt' => 23, 'para' => 26, 'link' => 65, 'imgTop' => 0, 'x' => 0, 'sep' => 39,
-            'text' => "Nos équipes maîtrisent des technologies d'automatisation avancées telles que la RPA, les workflows intelligents et les connecteurs API, qui éliminent les tâches répétitives et accélèrent vos opérations. Nous déployons également des modules d'intelligence artificielle pour l'analyse prédictive, la reconnaissance documentaire et la prise de décision assistée en temps réel. Chaque solution est dimensionnée aux réalités de votre secteur d'activité.",
-        ],
-        [
-            'id' => 'svc-audit', 'slug' => 'audit', 'title' => 'AUDI SI & AMOA', 'size' => 40, 'img' => 'figma_service_audit.jpg', 'h' => 359,
-            'top' => 76, 'pt' => 15, 'para' => 94, 'link' => 52, 'imgTop' => 0, 'x' => 0, 'sep' => 80,
-            'text' => "NEXORA réalise des audits approfondis de vos systèmes d'information, identifiant les axes d'amélioration, les risques et les opportunités d'optimisation. En tant qu'assistant à maîtrise d'ouvrage (AMOA), nous pilotons vos projets de transformation de bout en bout, du cadrage à la réception.",
-        ],
-        [
-            'id' => 'svc-conseil', 'slug' => 'conseil', 'title' => 'CONSEIL & TRANSFORMATION', 'size' => 40, 'img' => 'figma_service_conseil.jpg', 'h' => 298,
-            'top' => 74, 'pt' => 25, 'para' => 24, 'link' => 54, 'imgTop' => 0, 'x' => 4, 'sep' => 74, 'truncate' => true,
-            'text' => 'Nous accompagnons les dirigeants dans la définition de leur feuille de route digitale. Stratégie, gouvernance des données et conduite du changement : notre pôle conseil mobilise des experts reconnus pour accélérer la transformation de votre organisation et maximiser votre retour sur investissement technologique.',
-        ],
-        [
-            'id' => 'svc-btp', 'slug' => 'btp', 'title' => "BTP & FORNITURES\nMATERIEL IT", 'size' => 40, 'img' => 'figma_service_btp.jpg', 'h' => 453,
-            'top' => 78, 'pt' => 44, 'para' => 27, 'link' => 72, 'imgTop' => 0, 'x' => 4, 'sep' => null,
-            'text' => "NEXORA propose une offre intégrée de fournitures de matériels informatiques, de solutions d'infrastructure réseau et de travaux de câblage BTP. Nous assurons l'approvisionnement en équipements certifiés — serveurs, postes de travail, switches et solutions de stockage — ainsi que leur installation et maintenance. Nos équipes déploient des infrastructures conformes aux standards internationaux, en garantissant la performance, la sécurité et la durabilité de vos installations numériques sur le long terme.",
-        ],
+    $layout = [
+        'web-mobile' => ['id' => 'svc-web-mobile', 'size' => 40, 'h' => 394, 'top' => 0, 'pt' => 0, 'para' => 50, 'link' => 64, 'imgTop' => 3, 'x' => 0, 'sep' => 35],
+        'erp' => ['id' => 'svc-erp', 'size' => 35, 'h' => 394, 'top' => 79, 'pt' => 20, 'para' => 31, 'link' => 75, 'imgTop' => 0, 'x' => 0, 'sep' => 155],
+        'automatisation-ia' => ['id' => 'svc-automation', 'size' => 40, 'h' => 394, 'top' => 75, 'pt' => 23, 'para' => 26, 'link' => 65, 'imgTop' => 0, 'x' => 0, 'sep' => 39],
+        'audit' => ['id' => 'svc-audit', 'size' => 40, 'h' => 359, 'top' => 76, 'pt' => 15, 'para' => 94, 'link' => 52, 'imgTop' => 0, 'x' => 0, 'sep' => 80],
+        'conseil' => ['id' => 'svc-conseil', 'size' => 40, 'h' => 298, 'top' => 74, 'pt' => 25, 'para' => 24, 'link' => 54, 'imgTop' => 0, 'x' => 4, 'sep' => 74, 'truncate' => true],
+        'btp' => ['id' => 'svc-btp', 'size' => 40, 'h' => 453, 'top' => 78, 'pt' => 44, 'para' => 27, 'link' => 72, 'imgTop' => 0, 'x' => 4, 'sep' => null],
     ];
+    $services = [];
+    foreach ($layout as $slug => $block) {
+        if ($page = $pages->get($slug)) {
+            $services[] = $block + ['slug' => $slug, 'title' => $page->overview_title, 'text' => $page->overview_text, 'img' => $page->overviewImageUrl()];
+        }
+    }
+    // The last block has no separator below it
+    if ($services) {
+        $services[array_key_last($services)]['sep'] = null;
+    }
 @endphp
 
 @include('pages.partials.figma-motion')
@@ -145,7 +127,7 @@
                         </svg>
                     </a>
                 </div>
-                <img src="{{ asset('assets/img/' . $service['img']) }}" alt="{{ str_replace("\n", ' ', $service['title']) }}" loading="lazy"
+                <img src="{{ $service['img'] }}" alt="{{ str_replace("\n", ' ', $service['title']) }}" loading="lazy"
                     class="w-full h-56 sm:h-80 object-cover rounded-3xl lg:mt-[calc((var(--top)_+_var(--img))*var(--u))] lg:ml-[calc((133_+_var(--x))*var(--u))] lg:w-[calc(748*var(--u))] lg:h-[calc(var(--h)*var(--u))] lg:rounded-[calc(29*var(--u))]">
             </div>
             @if ($service['sep'] !== null)

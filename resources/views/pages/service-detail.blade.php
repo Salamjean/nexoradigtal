@@ -11,9 +11,8 @@
     /*
      * Reproduces the six Figma service frames (486:950 ... 486:1496), laid out at 1886px wide.
      * Desktop measurements use "u" units: --u = 1/1886 of the page width (see home.blade.php).
-     * Page data (texts, offsets, images) lives in config/nexora_services.php.
+     * Texts and images come from the database (edited in /admin/services), the offsets from config/nexora_services.php.
      */
-    $img = fn (string $suffix) => asset('assets/img/figma_svc_' . $service['img'] . '_' . $suffix . '.jpg');
 @endphp
 
 @include('pages.partials.figma-motion')
@@ -55,7 +54,7 @@
     <!-- ============================================================ -->
     <div class="px-4 sm:px-6 mt-10 lg:mt-0 lg:px-0 lg:pl-[calc(154*var(--u))]">
         <div class="relative w-full h-56 sm:h-96 lg:w-[calc(1578*var(--u))] lg:h-[calc(693*var(--u))]">
-            <img src="{{ $img('main') }}" alt="{{ $service['name'] }} - NEXORA" class="absolute inset-0 w-full h-full object-cover rounded-3xl lg:rounded-[calc(30*var(--u))]">
+            <img src="{{ $service['image'] }}" alt="{{ $service['name'] }} - NEXORA" class="absolute inset-0 w-full h-full object-cover rounded-3xl lg:rounded-[calc(30*var(--u))]">
             @if ($service['glow'])
                 <!-- Figma overlays: red 10% + blue 17% with a blue glow -->
                 <span class="absolute inset-0 rounded-3xl bg-[#ff0901]/10 lg:rounded-[calc(30*var(--u))]" aria-hidden="true"></span>
@@ -71,7 +70,7 @@
         <div class="lg:pt-[calc(13*var(--u))] lg:w-[calc(748*var(--u))] lg:shrink-0">
             <h2 class="font-eurostile font-bold uppercase leading-[1.3] text-[23px] sm:text-[32px] lg:w-[calc(556*var(--u))] lg:text-[max(20px,calc(40*var(--u)))]">DISCUTONS DE VOTRE VISION DIGITAL</h2>
             <p class="mt-5 font-medium text-[#888] text-justify tracking-[0.02em] leading-[1.41] text-base lg:mt-[calc(49*var(--u))] lg:text-[max(13px,calc(21.3*var(--u)))]">
-                Pour en savoir plus sur nos services de développement web et mobile ou pour discuter d'un projet spécifique, l'équipe NEXORA est à votre disposition. N'hésitez pas à nous contacter directement ou nous écrire à <a href="mailto:contact@nexora.fr" class="transition-colors hover:text-white">contact@nexora.fr</a> pour découvrir comment notre expertise digitale peut contribuer à la réussite de vos projets.
+                Pour en savoir plus sur nos services de développement web et mobile ou pour discuter d'un projet spécifique, l'équipe NEXORA est à votre disposition. N'hésitez pas à nous contacter directement ou nous écrire à <a href="mailto:{{ Site::get('email_contact') }}" class="transition-colors hover:text-white">{{ Site::get('email_contact') }}</a> pour découvrir comment notre expertise digitale peut contribuer à la réussite de vos projets.
             </p>
         </div>
         <div class="relative shrink-0 flex items-center justify-center w-full aspect-[686/396] rounded-3xl bg-black lg:block lg:aspect-auto lg:ml-[calc(139*var(--u))] lg:w-[calc(686*var(--u))] lg:h-[calc(396*var(--u))] lg:rounded-[calc(33*var(--u))]">
@@ -88,8 +87,8 @@
     <section class="pt-14 pb-16 lg:pt-[calc(112*var(--u))] lg:pb-[calc(100*var(--u))]">
         <div x-data x-init="if (window.matchMedia('(min-width: 1024px)').matches) { const c = $el.querySelectorAll('img'); if (c[1]) $el.scrollLeft = c[1].offsetLeft - c[0].offsetLeft; }"
             class="flex gap-3 overflow-x-auto nx-scroll-hide [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory px-4 scroll-px-4 lg:gap-[calc(20*var(--u))] lg:px-[calc(392*var(--u))] lg:scroll-px-[calc(392*var(--u))]">
-            @foreach (['g1', 'g2', 'g3'] as $i => $g)
-                <img src="{{ $img($g) }}" alt="{{ $service['name'] }} - illustration {{ $i + 1 }}" loading="lazy"
+            @foreach ($service['gallery'] as $i => $src)
+                <img src="{{ $src }}" alt="{{ $service['name'] }} - illustration {{ $i + 1 }}" loading="lazy"
                     class="snap-start shrink-0 w-[300px] h-[182px] sm:w-[480px] sm:h-[290px] object-cover rounded-[7px] lg:w-[calc(1008*var(--u))] lg:h-[calc(610*var(--u))] lg:rounded-[calc(7*var(--u))]">
             @endforeach
         </div>

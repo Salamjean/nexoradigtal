@@ -3,10 +3,18 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactMessage;
+use App\Models\Project;
+use App\Models\ServicePage;
+use App\Models\TeamMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * Public pages. Texts and images edited from the admin panel come from the database;
+ * the Figma pixel layout stays in the views and config/nexora_services.php.
+ */
 class HomeController extends Controller
 {
     public function index()
@@ -16,7 +24,7 @@ class HomeController extends Controller
 
     public function about()
     {
-        return view('pages.about');
+        return view('pages.about', ['team' => TeamMember::query()->published()->get()]);
     }
 
     public function history()
@@ -31,7 +39,7 @@ class HomeController extends Controller
 
     /**
      * Handles both contact page forms ("renseignements" and "carrieres").
-     * No mailer is configured yet: submissions are logged and CVs are kept in storage/app/private/candidatures.
+     * Messages are saved for the admin panel (/admin/messages); CVs are kept in storage/app/private/candidatures.
      */
     public function contactSend(Request $request)
     {
@@ -68,29 +76,44 @@ class HomeController extends Controller
 
         $data = $validator->safe()->except(['consent', 'cv']);
         if ($request->hasFile('cv')) {
-            $data['cv'] = $request->file('cv')->store('candidatures', 'local');
+            $data['cv_path'] = $request->file('cv')->store('candidatures', 'local');
         }
 
-        Log::info("Formulaire de contact ({$type})", $data);
+        $message = ContactMessage::query()->create(['type' => $type] + $data);
+        Log::info("Formulaire de contact ({$type}) #{$message->id}");
 
         return $back->with('contact_sent', $type);
     }
 
     public function service()
     {
-        return view('pages.service');
+        return view('pages.service', ['pages' => ServicePage::ordered()->keyBy('slug')]);
     }
 
     public function serviceShow(string $slug)
     {
-        $service = config("nexora_services.$slug");
-        abort_if($service === null, 404);
+        $layout = config("nexora_services.$slug");
+        $page = ServicePage::query()->where('slug', $slug)->first();
+        abort_if($layout === null || $page === null, 404);
 
-        return view('pages.service-detail', ['service' => $service + ['slug' => $slug]]);
+        // Paragraph gaps come from the Figma layout; a 2nd paragraph added from the admin gets the usual gap
+        $paras = [[$layout['paras'][0][0], $page->para1]];
+        if (filled($page->para2)) {
+            $paras[] = [$layout['paras'][1][0] ?? 48.5, $page->para2];
+        }
+
+        return view('pages.service-detail', ['service' => [
+            'slug' => $slug,
+            'name' => $page->name,
+            'title' => $page->title,
+            'paras' => $paras,
+            'image' => $page->imageUrl(),
+            'gallery' => $page->galleryUrls(),
+        ] + $layout]);
     }
 
     public function project()
     {
-        return view('pages.project');
+        return view('pages.project', ['projects' => Project::query()->published()->get()]);
     }
 }

@@ -4,6 +4,9 @@
  * The six service pages (Figma frames 486:950, 486:1132, 486:1223, 486:1314, 486:1405, 486:1496),
  * keyed by URL slug: /service/{slug}.
  *
+ * Texts and images are the defaults seeded into the "service_pages" table (edited from /admin/services);
+ * the pixel layout below stays in this file.
+ *
  * Vertical offsets are Figma pixels on the 1886px frame (see service-detail.blade.php):
  *   label     top of "Nos services" below the hero (frame y - 909)
  *   title     gap between "Nos services" and the title line box
@@ -25,6 +28,9 @@ return [
         ],
         'glow' => true,
         'img' => 'web',
+        // Services page: carousel card (null = no card) and overview block
+        'card' => 'Plateforme web & mobile',
+        'overview' => ['title' => 'PLATEFORME WEB &MOBILE', 'image' => 'figma_service_web.jpg', 'text' => "NEXORA conçoit et développe des plateformes web et applications mobiles sur mesure, couvrant l'intégralité du cycle produit. De la conception UX/UI au déploiement en production, nous assurons le développement front-end et back-end, ainsi que les intégrations API et l'architecture cloud. Nos solutions sont conçues pour la performance, la sécurité et la scalabilité sur les marchés africains et internationaux."],
     ],
     'erp' => [
         'name' => 'ERP & Systèmes d’information', 'tab' => 'ERP',
@@ -36,6 +42,9 @@ return [
         ],
         'glow' => false,
         'img' => 'erp',
+        // Services page: carousel card (null = no card) and overview block
+        'card' => 'ERP 1 Système d’information',
+        'overview' => ['title' => 'ERP SYSTEMES D’INFORMATION', 'image' => 'figma_service_web.jpg', 'text' => "NEXORA déploie et paramètre des systèmes ERP adaptés à vos processus métiers, en s'appuyant sur les meilleures solutions du marché. Nous accompagnons la migration de vos outils vers des environnements intégrés qui centralisent vos données, automatisent vos flux et optimisent votre pilotage opérationnel. Nos consultants assurent une adoption fluide et un transfert de compétences durable vers vos équipes. Nous couvrons les modules clés : finance, RH, logistique, CRM et gestion de projets."],
     ],
     'automatisation-ia' => [
         'name' => 'Automatisation & IA', 'tab' => 'Automatisation & IA',
@@ -47,6 +56,9 @@ return [
         ],
         'glow' => true,
         'img' => 'ia',
+        // Services page: carousel card (null = no card) and overview block
+        'card' => 'Automatisation & IA',
+        'overview' => ['title' => 'AUTOMATISATION & IA', 'image' => 'figma_service_ia.jpg', 'text' => "Nos équipes maîtrisent des technologies d'automatisation avancées telles que la RPA, les workflows intelligents et les connecteurs API, qui éliminent les tâches répétitives et accélèrent vos opérations. Nous déployons également des modules d'intelligence artificielle pour l'analyse prédictive, la reconnaissance documentaire et la prise de décision assistée en temps réel. Chaque solution est dimensionnée aux réalités de votre secteur d'activité."],
     ],
     'audit' => [
         'name' => 'Audit SI & AMOA', 'tab' => 'Audit',
@@ -57,6 +69,9 @@ return [
         ],
         'glow' => false,
         'img' => 'audit',
+        // Services page: carousel card (null = no card) and overview block
+        'card' => 'Audit SI & AMOA',
+        'overview' => ['title' => 'AUDI SI & AMOA', 'image' => 'figma_service_audit.jpg', 'text' => "NEXORA réalise des audits approfondis de vos systèmes d'information, identifiant les axes d'amélioration, les risques et les opportunités d'optimisation. En tant qu'assistant à maîtrise d'ouvrage (AMOA), nous pilotons vos projets de transformation de bout en bout, du cadrage à la réception."],
     ],
     'conseil' => [
         'name' => 'Conseil & transformation', 'tab' => 'Infrastructure',
@@ -68,6 +83,9 @@ return [
         ],
         'glow' => false,
         'img' => 'conseil',
+        // Services page: carousel card (null = no card) and overview block
+        'card' => 'Conseil et transformation',
+        'overview' => ['title' => 'CONSEIL & TRANSFORMATION', 'image' => 'figma_service_conseil.jpg', 'text' => 'Nous accompagnons les dirigeants dans la définition de leur feuille de route digitale. Stratégie, gouvernance des données et conduite du changement : notre pôle conseil mobilise des experts reconnus pour accélérer la transformation de votre organisation et maximiser votre retour sur investissement technologique.'],
     ],
     'btp' => [
         'name' => 'BTP & fournitures matériel IT', 'tab' => 'BTP',
@@ -79,5 +97,8 @@ return [
         ],
         'glow' => false,
         'img' => 'btp',
+        // Services page: carousel card (null = no card) and overview block
+        'card' => null,
+        'overview' => ['title' => "BTP & FORNITURES\nMATERIEL IT", 'image' => 'figma_service_btp.jpg', 'text' => "NEXORA propose une offre intégrée de fournitures de matériels informatiques, de solutions d'infrastructure réseau et de travaux de câblage BTP. Nous assurons l'approvisionnement en équipements certifiés — serveurs, postes de travail, switches et solutions de stockage — ainsi que leur installation et maintenance. Nos équipes déploient des infrastructures conformes aux standards internationaux, en garantissant la performance, la sécurité et la durabilité de vos installations numériques sur le long terme."],
     ],
 ];
