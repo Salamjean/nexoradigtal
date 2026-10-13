@@ -25,7 +25,7 @@ Route::get('/project', [HomeController::class, 'project'])->name('project');
  */
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('guest')->group(function () {
-        Route::get('/connexion', [AuthController::class, 'create'])->name('login');
+        Route::get('/login', [AuthController::class, 'create'])->name('login');
         Route::post('/connexion', [AuthController::class, 'store'])->middleware('throttle:6,1')->name('login.store');
     });
 
